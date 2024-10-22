@@ -29,7 +29,6 @@
     <button type="submit">Actualizar Usuario</button>
 </form>
 
-<script src="{{ asset('assets/crud_user.js') }}"></script>
 
 </body>
 </html>

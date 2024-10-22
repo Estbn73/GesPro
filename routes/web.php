@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CrudUsersController;
+use App\Http\Controllers\ProyectoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +27,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin/index', [AdminController::class, 'index'])->middleware('auth');
 Route::get('/user/home', [UserController::class, 'index'])->middleware('auth');
 Route::resource('users', CrudUsersController::class);
+Route::resource('proyectos', ProyectoController::class);

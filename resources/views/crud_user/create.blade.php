@@ -24,8 +24,8 @@
     <label for="password_confirmation">Confirmar Contraseña:</label>
     <input type="password" name="password_confirmation" required>
 
-    <label for="role">Rol:</label>
-    <select name="role" required>
+    <label for="rol">Rol:</label>
+    <select name="rol" required>
         <option value="admin">Administrador</option>
         <option value="user">Usuario</option>
     </select>
@@ -33,7 +33,6 @@
     <button type="submit">Crear Usuario</button>
 </form>
 
-<script src="{{ asset('assets/crud_user.js') }}"></script>
 
 </body>
 </html>
