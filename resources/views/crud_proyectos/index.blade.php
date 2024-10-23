@@ -34,7 +34,7 @@
                     <td>
                         <a href="{{ route('proyectos.edit', $proyecto) }}" class="btn btn-warning">Editar</a>
                         <form action="{{ route('proyectos.destroy', $proyecto) }}" method="POST" style="display:inline;">
-                            @csrf
+                            @CSRF
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>

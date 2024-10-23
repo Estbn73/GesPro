@@ -28,7 +28,7 @@ class ProyectoController extends Controller
             'estado' => 'boolean',
         ]);
 
-        Proyecto::create($request->all());
+        Proyecto::create($request->only(['nombre', 'descripcion', 'fecha_inicio', 'fecha_final', 'estado']));
         
         return redirect()->route('proyectos.index')->with('success', 'Proyecto creado exitosamente.');
     }
