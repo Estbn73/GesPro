@@ -27,7 +27,7 @@
                 <td>{{ $user->rol }}</td> 
                 <td>
                     <a href="{{ route('users.edit', $user) }}" class="btn btn-warning" >Editar</a>
-                    <form action="{{ route('users.destroy', $user) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('users.destroy', $user) }}"method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" >Eliminar</button>

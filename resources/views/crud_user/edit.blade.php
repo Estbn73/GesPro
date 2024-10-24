@@ -1,32 +1,40 @@
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuario: {{ $user->name }}</title>
-    <link rel="stylesheet" href="{{ asset('assets/crud_user.css') }}"> 
-</head>
-<body>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Editar Usuario: {{ $user->name }}</div>
 
-<h1>Editar Usuario: {{ $user->name }}</h1>
+                <div class="card-body">
+                    <form action="{{ route('users.update', $user) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" name="name" value="{{ $user->name }}" required>
+                        </div>
 
-<form action="{{ route('users.update', $user) }}" method="POST">
-    @csrf
-    @method('PUT')
-    
-    <label for="name">Nombre:</label>
-    <input type="text" name="name" value="{{ $user->name }}" required>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                        </div>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" value="{{ $user->email }}" required>
+                        <div class="mb-3">
+                            <label for="rol" class="form-label">Rol:</label>
+                            <select name="rol" class="form-select" required>
+                                <option value="admin" {{ $user->rol == 'admin' ? 'selected' : '' }}>Administrador</option>
+                                <option value="user" {{ $user->rol == 'user' ? 'selected' : '' }}>Usuario</option>
+                            </select>
+                        </div>
 
-    <label for="rol">Rol:</label>
-    <select name="rol" required>
-        <option value="admin" {{ $user->rol == 'admin' ? 'selected' : '' }}>Administrador</option>
-        <option value="user" {{ $user->rol == 'user' ? 'selected' : '' }}>Usuario</option>
-    </select>
-
-    <button type="submit">Actualizar Usuario</button>
-</form>
-
-</body>
-</html>
+                        <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

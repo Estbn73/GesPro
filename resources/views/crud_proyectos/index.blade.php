@@ -33,7 +33,7 @@
                     <td>{{ $proyecto->estado ? 'Terminado' : 'En Progreso' }}</td>
                     <td>
                         <a href="{{ route('proyectos.edit', $proyecto) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('proyectos.destroy', $proyecto) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('proyectos.destroy', $proyecto) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');">
                             @CSRF
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
