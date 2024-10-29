@@ -1,35 +1,75 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuario: {{ $user->name }}</title>
-    <link rel="stylesheet" href="{{ asset('assets/crud_user.css') }}"> 
-</head>
-<body>
+@extends('layouts.app')
 
-<h1>Editar Usuario: {{ $user->name }}</h1>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Editar Usuario: {{ $user->name }}</div>
 
-<form action="{{ route('users.update', $user) }}" method="POST">
-    @csrf
-    @method('PUT')
-    
-    <label for="name">Nombre:</label>
-    <input type="text" name="name" value="{{ $user->name }}" required>
+                <div class="card-body">
+                    <form action="{{ route('users.update', $user) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" name="name" value="{{ $user->name }}" required>
+                        </div>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" value="{{ $user->email }}" required>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                        </div>
 
-    <label for="rol">Rol:</label>
-    <select name="rol" required>
-        <option value="admin" {{ $user->rol == 'admin' ? 'selected' : '' }}>Administrador</option>
-        <option value="user" {{ $user->rol == 'user' ? 'selected' : '' }}>Usuario</option>
-    </select>
+                        <div class="mb-3">
+                            <label for="rol" class="form-label">Rol:</label>
+                            <select name="rol" class="form-select" required>
+                                <option value="admin" {{ $user->rol == 'admin' ? 'selected' : '' }}>Administrador</option>
+                                <option value="user" {{ $user->rol == 'user' ? 'selected' : '' }}>Usuario</option>
+                            </select>
+                        </div>
 
-    <button type="submit">Actualizar Usuario</button>
-</form>
+                        <div class="mb-3">
+                            <label for="proyectos" class="form-label">Proyectos Asignados:</label>
+                            <button type="button" id="toggle-projects" class="btn btn-secondary mb-2">Seleccionar Proyectos</button>
+                            <div id="projects-container" style="display: none;">
+                                @foreach($proyectos as $proyecto)
+                                    <div class="form-check">
+                                        <input type="checkbox" name="proyectos[{{ $proyecto->id }}][id]" value="{{ $proyecto->id }}" 
+                                            {{ $user->proyectos->contains($proyecto) ? 'checked' : '' }} 
+                                            id="proyecto_{{ $proyecto->id }}" 
+                                            class="form-check-input">
+                                        <label for="proyecto_{{ $proyecto->id }}" class="form-check-label">{{ $proyecto->nombre }}</label>
 
-<script src="{{ asset('assets/crud_user.js') }}"></script>
+                                        <!-- Selección del Rol en el proyecto -->
+                                        <select name="proyectos[{{ $proyecto->id }}][rol]" class="form-select mt-1">
+                                            <option value="" disabled>Selecciona un rol</option>
+                                            <option value="1" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider ? 'selected' : '' }}>Líder</option>
+                                            <option value="0" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider === 0 ? 'selected' : '' }}>Desarrollador</option>
+                                        </select>
 
-</body>
-</html>
+
+
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Mostrar/ocultar el contenedor de proyectos
+document.getElementById('toggle-projects').addEventListener('click', function() {
+    const container = document.getElementById('projects-container');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+});
+</script>
+
+@endsection

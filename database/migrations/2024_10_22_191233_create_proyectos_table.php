@@ -11,15 +11,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('proyectos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('nombre');
+            $table->text('descripcion');
+            $table->date('fecha_inicio');
+            $table->date('fecha_final');
+            $table->boolean('estado')->default(false); 
             $table->timestamps();
         });
     }
@@ -29,14 +29,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('proyectos');
     }
 
     use HasFactory;
 
-    public function proyectos()
+    public function equipo()
     {
-        return $this->belongsToMany(Proyecto::class, 'equipo_proyecto')
+        return $this->belongsToMany(User::class, 'equipo_proyecto')
                     ->withPivot('lider') 
                     ->withTimestamps();
     }

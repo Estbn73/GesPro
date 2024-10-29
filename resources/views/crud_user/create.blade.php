@@ -1,39 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Usuario</title>
-    <link rel="stylesheet" href="{{ asset('assets/crud_user.css') }}"> 
-</head>
-<body>
+@extends('layouts.app') 
 
-<h1>Crear Usuario</h1>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Crear Usuario</div>
 
-<form action="{{ route('users.store') }}" method="POST">
-    @csrf
-    <label for="name">Nombre:</label>
-    <input type="text" name="name" required>
+                <div class="card-body">
+                    <form action="{{ route('users.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" required>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
 
-    <label for="password">Contraseña:</label>
-    <input type="password" name="password" required>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña:</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
 
-    <label for="password_confirmation">Confirmar Contraseña:</label>
-    <input type="password" name="password_confirmation" required>
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirmar Contraseña:</label>
+                            <input type="password" class="form-control" name="password_confirmation" required>
+                        </div>
 
-    <label for="role">Rol:</label>
-    <select name="role" required>
-        <option value="admin">Administrador</option>
-        <option value="user">Usuario</option>
-    </select>
+                        <div class="mb-3">
+                            <label for="rol" class="form-label">Rol:</label>
+                            <select name="rol" class="form-select" required>
+                                <option value="admin">Administrador</option>
+                                <option value="user">Usuario</option>
+                            </select>
+                        </div>
 
-    <button type="submit">Crear Usuario</button>
-</form>
+                        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
 
-<script src="{{ asset('assets/crud_user.js') }}"></script>
-
-</body>
-</html>

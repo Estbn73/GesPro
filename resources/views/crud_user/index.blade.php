@@ -1,12 +1,16 @@
-<h2>Gestión de Usuarios</h2>
+@extends('layouts.app')
 
-<a href="{{ route('users.create') }}" class="btn">Crear Nuevo Usuario</a>
+@section('content')
+
+<div class = "conteiner">
+<h2>Gestión de Usuarios</h2>
+<a href="{{ route('users.create') }}" class="btn btn-primary">Crear Nuevo Usuario</a>
 
 @if(session('success'))
     <div>{{ session('success') }}</div>
 @endif
 
-<table>
+<table class ="table">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -22,11 +26,11 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->rol }}</td> 
                 <td>
-                    <a href="{{ route('users.edit', $user) }}">Editar</a>
-                    <form action="{{ route('users.destroy', $user) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('users.edit', $user) }}" class="btn btn-warning" >Editar</a>
+                    <form action="{{ route('users.destroy', $user) }}"method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Eliminar</button>
+                        <button type="submit" class="btn btn-danger" >Eliminar</button>
                     </form>
                 </td>
             </tr>
@@ -37,6 +41,8 @@
         @endforelse
     </tbody>
 </table>
+</div>
 
-<script>
-</script>
+
+
+@endsection
