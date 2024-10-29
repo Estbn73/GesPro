@@ -28,3 +28,4 @@ Route::get('/admin/index', [AdminController::class, 'index'])->middleware('auth'
 Route::get('/user/home', [UserController::class, 'index'])->middleware('auth');
 Route::resource('users', CrudUsersController::class);
 Route::resource('proyectos', ProyectoController::class);
+Route::post('/proyecto/{proyectoId}/asignar-usuario', [UserController::class, 'asignarUsuario'])->middleware('auth')->name('asignar.usuario');

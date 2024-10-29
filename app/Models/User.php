@@ -43,4 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    use HasFactory;
+
+    public function proyectos()
+    {
+        return $this->belongsToMany(Proyecto::class, 'equipo_proyecto')
+                    ->withPivot('lider') 
+                    ->withTimestamps();
+    }
+    
 }

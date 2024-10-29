@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 return new class extends Migration
 {
@@ -28,5 +30,14 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+    }
+
+    use HasFactory;
+
+    public function proyectos()
+    {
+        return $this->belongsToMany(Proyecto::class, 'equipo_proyecto')
+                    ->withPivot('lider') 
+                    ->withTimestamps();
     }
 };
