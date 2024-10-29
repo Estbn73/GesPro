@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CrudUsersController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,5 @@ Route::get('/admin/index', [AdminController::class, 'index'])->middleware('auth'
 Route::get('/user/home', [UserController::class, 'index'])->middleware('auth');
 Route::resource('users', CrudUsersController::class);
 Route::resource('proyectos', ProyectoController::class);
+Route::resource('documents', DocumentController::class);
+Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');

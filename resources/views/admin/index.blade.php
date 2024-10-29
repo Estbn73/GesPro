@@ -14,7 +14,8 @@
     <div class="sidebar" id="sidebar">
     <a href="#home">Inicio</a>
     <a href="#" id="manage-users">Gestión de Usuarios</a>
-    <a href="#" id="manage-projects">Gestión de Proyectos</a> <!-- Nueva opción -->
+    <a href="#" id="manage-projects">Gestión de Proyectos</a>
+    <a href="#" id="manage-documents">Ver Documentos</a>
     <a href="#settings">Configuraciones</a>
     <a class="dropdown-item" href="{{ route('logout') }}"
        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -78,6 +79,21 @@
     .catch(error => {
         console.error('Error al cargar la gestión de proyectos:', error);
     });
+
+    // FUNCION DE CRUD DE DOCUMENTOS
+    document.getElementById('manage-documents').addEventListener('click', function() {
+        loadDocumentManagement();
+    });
+
+    function loadDocumentManagement() {
+        fetch('{{ route("documents.index") }}') // Asegúrate de que la ruta exista y apunte a la lista de documentos
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('user-management-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error al cargar la gestión de documentos:', error));
+    }
+
 
 
 }
