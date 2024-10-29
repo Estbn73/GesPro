@@ -30,6 +30,32 @@
                             </select>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="proyectos" class="form-label">Proyectos Asignados:</label>
+                            <button type="button" id="toggle-projects" class="btn btn-secondary mb-2">Seleccionar Proyectos</button>
+                            <div id="projects-container" style="display: none;">
+                                @foreach($proyectos as $proyecto)
+                                    <div class="form-check">
+                                        <input type="checkbox" name="proyectos[{{ $proyecto->id }}][id]" value="{{ $proyecto->id }}" 
+                                            {{ $user->proyectos->contains($proyecto) ? 'checked' : '' }} 
+                                            id="proyecto_{{ $proyecto->id }}" 
+                                            class="form-check-input">
+                                        <label for="proyecto_{{ $proyecto->id }}" class="form-check-label">{{ $proyecto->nombre }}</label>
+
+                                        <!-- Selección del Rol en el proyecto -->
+                                        <select name="proyectos[{{ $proyecto->id }}][rol]" class="form-select mt-1">
+                                            <option value="" disabled>Selecciona un rol</option>
+                                            <option value="1" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider ? 'selected' : '' }}>Líder</option>
+                                            <option value="0" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider === 0 ? 'selected' : '' }}>Desarrollador</option>
+                                        </select>
+
+
+
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
                     </form>
                 </div>
@@ -37,4 +63,13 @@
         </div>
     </div>
 </div>
+
+<script>
+// Mostrar/ocultar el contenedor de proyectos
+document.getElementById('toggle-projects').addEventListener('click', function() {
+    const container = document.getElementById('projects-container');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+});
+</script>
+
 @endsection

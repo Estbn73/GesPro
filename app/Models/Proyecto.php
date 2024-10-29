@@ -14,4 +14,14 @@ class Proyecto extends Model
         'fecha_final',  
         'estado',        
     ];
+
+    use HasFactory;
+
+    public function equipo()
+    {
+        return $this->belongsToMany(User::class, 'equipo_proyecto')
+                    ->withPivot('lider') 
+                    ->withTimestamps();
+    }
+    
 }

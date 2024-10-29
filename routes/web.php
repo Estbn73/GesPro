@@ -31,3 +31,4 @@ Route::resource('users', CrudUsersController::class);
 Route::resource('proyectos', ProyectoController::class);
 Route::resource('documents', DocumentController::class);
 Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
+Route::post('/proyecto/{proyectoId}/asignar-usuario', [UserController::class, 'asignarUsuario'])->middleware('auth')->name('asignar.usuario');
