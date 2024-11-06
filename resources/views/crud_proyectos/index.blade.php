@@ -33,6 +33,7 @@
                     <td>{{ $proyecto->estado ? 'Terminado' : 'En Progreso' }}</td>
                     <td>
                         <a href="{{ route('proyectos.edit', $proyecto) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ route('proyectos.show', $proyecto->id) }}" class="btn btn-info btn-sm">Ver Tareas</a>
                         <form action="{{ route('proyectos.destroy', $proyecto) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');">
                             @CSRF
                             @method('DELETE')

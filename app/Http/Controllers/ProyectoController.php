@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use App\Models\Tarea;
 
 class ProyectoController extends Controller
 {
@@ -59,4 +60,13 @@ class ProyectoController extends Controller
         
         return redirect()->route('proyectos.index')->with('success', 'Proyecto eliminado exitosamente.');
     }
+
+        public function show(Proyecto $proyecto)
+    {
+        // Cargar las tareas relacionadas con el proyecto
+        $tareas = Tarea::where('proyecto_id', $proyecto->id)->paginate(10);  
+        return view('crud_proyectos.show', compact('proyecto', 'tareas'));
+
+    }
+
 }

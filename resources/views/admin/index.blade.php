@@ -16,7 +16,9 @@
     <a href="#" id="manage-users">Gestión de Usuarios</a>
     <a href="#" id="manage-projects">Gestión de Proyectos</a>
     <a href="#" id="manage-documents">Ver Documentos</a>
-    <a href="#settings">Configuraciones</a>
+    <a href="#" id="manage-tareas">Ver Tareas</a>
+
+
     <a class="dropdown-item" href="{{ route('logout') }}"
        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         Cerrar sesión
@@ -92,6 +94,20 @@
                 document.getElementById('user-management-container').innerHTML = html;
             })
             .catch(error => console.error('Error al cargar la gestión de documentos:', error));
+    }
+    
+ // Función para CRUD de Tareas
+    document.getElementById('manage-tareas').addEventListener('click', function() {
+        loadTaskManagement();
+    });
+   
+    function loadTaskManagement() {
+        fetch('{{ route("tareas.index") }}') // Ruta para cargar la vista de tareas
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('user-management-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error al cargar la gestión de tareas:', error));
     }
 
 

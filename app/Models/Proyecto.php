@@ -23,5 +23,11 @@ class Proyecto extends Model
                     ->withPivot('lider') 
                     ->withTimestamps();
     }
+
+        public function tareas()
+    {
+        return $this->hasMany(Tarea::class, 'proyecto_id');
+    }
+
     
 }

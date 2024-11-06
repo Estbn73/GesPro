@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CrudUsersController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\TareaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +34,6 @@ Route::resource('proyectos', ProyectoController::class);
 Route::resource('documents', DocumentController::class);
 Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
 Route::post('/proyecto/{proyectoId}/asignar-usuario', [UserController::class, 'asignarUsuario'])->middleware('auth')->name('asignar.usuario');
+Route::resource('tareas', TareaController::class);
+Route::get('proyectos/{proyecto}', [ProyectoController::class, 'show'])->name('proyectos.show');
+
