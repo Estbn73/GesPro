@@ -7,26 +7,24 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, Proyecto $proyecto)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'file' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',
         ]);
-
+    
         $filePath = $request->file('file')->store('documents');
-
+    
         Document::create([
             'name' => $request->input('name'),
             'file_path' => $filePath,
+            'proyecto_id' => $proyecto->id
         ]);
-
-
-        return redirect()->route('documents.index')->with('success', 'Documento subido correctamente.');
-
-
+    
+        return redirect()->route('proyectos.documents.index', $proyecto)->with('success', 'Documento subido correctamente.');
     }
-
+    
     public function download($id)
     {
         $document = Document::findOrFail($id);

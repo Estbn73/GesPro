@@ -8,8 +8,7 @@
                 <div class="card-header">Subir Documento</div>
 
                 <div class="card-body">
-                    <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
+                <form action="{{ route('proyectos.documents.store', $proyecto) }}" method="POST" enctype="multipart/form-data">                        @csrf
                         
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre del Documento:</label>

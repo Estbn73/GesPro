@@ -10,8 +10,8 @@ class ProyectoController extends Controller
 {
     public function index()
 {
-    $proyectos = Proyecto::paginate(10); 
-    return view('crud_proyectos.index', compact('proyectos'));
+    $proyectos = Proyecto::all();
+    return view('proyectos.index', compact('proyectos'));
 }
 
     public function create()
@@ -61,12 +61,13 @@ class ProyectoController extends Controller
         return redirect()->route('proyectos.index')->with('success', 'Proyecto eliminado exitosamente.');
     }
 
-        public function show(Proyecto $proyecto)
+    public function show(Proyecto $proyecto)
     {
-        // Cargar las tareas relacionadas con el proyecto
-        $tareas = Tarea::where('proyecto_id', $proyecto->id)->paginate(10);  
-        return view('crud_proyectos.show', compact('proyecto', 'tareas'));
-
+        // Cargar los elementos relacionados con el proyecto
+        $proyecto->load(['riesgos', 'presupuesto', 'notas', 'tareas', 'documents', 'equipo']);
+    
+        return view('proyectos.show', compact('proyecto'));
     }
+    
 
 }

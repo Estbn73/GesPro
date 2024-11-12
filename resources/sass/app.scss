@@ -6,3 +6,34 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+/* Estilos personalizados para el login */
+.container {
+    min-height: 80vh;
+}
+
+.card {
+    border-radius: 8px;
+}
+
+.btn-primary {
+    background-color: #2a7a7b;
+    border: none;
+    &:hover {
+        background-color: darken(#2a7a7b, 10%);
+    }
+}
+
+
+.nav-link.active {
+    background-color: darken($primary-color, 10%);
+    color: #ffffff;
+}
+
+.card {
+    border-radius: 8px;
+    .card-title {
+        font-weight: bold;
+    }
+}
+

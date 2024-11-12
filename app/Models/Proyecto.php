@@ -29,5 +29,28 @@ class Proyecto extends Model
         return $this->hasMany(Tarea::class, 'proyecto_id');
     }
 
+        public function riesgos()
+    {
+        return $this->hasMany(Riesgo::class);
+    }
+
+    public function presupuesto()
+    {
+        return $this->hasOne(Presupuesto::class);
+    }
+
+    public function notas()
+    {
+        return $this->hasMany(Nota::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+    
+
+
+
     
 }
