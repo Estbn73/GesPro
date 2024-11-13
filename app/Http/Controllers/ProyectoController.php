@@ -69,5 +69,11 @@ class ProyectoController extends Controller
         return view('proyectos.show', compact('proyecto'));
     }
     
+    public function proyectoTareas(Proyecto $proyecto) { 
+
+        //dd($proyecto);
+        $id = $proyecto->id;
+        return view('proyectos.tareas', compact('id'));
+    }
 
 }

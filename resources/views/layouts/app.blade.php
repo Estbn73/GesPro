@@ -53,6 +53,5 @@
     @vite(['resources/js/app.js'])
     @yield('scripts') <!-- Incluir cualquier otro script adicional -->
     @livewireScripts <!-- Incluir scripts de Livewire -->
-    <script src="//unpkg.com/alpinejs" defer></script> <!-- Necesario para el funcionamiento de Alpine.js y Livewire -->
 </body>
 </html>

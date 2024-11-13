@@ -10,6 +10,7 @@ use App\Http\Controllers\TareaController;
 use App\Http\Controllers\RiesgoController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\NotaController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -46,5 +47,7 @@ Route::middleware(['auth'])->group(function () {
     // Rutas adicionales para vista de carga dinámica de cada sección (si necesitas)
     Route::get('/proyectos/{proyecto}/{section}/{view}', [ProyectoController::class, 'loadSectionView'])->name('proyectos.section.view');
     Route::get('/proyectos/{proyecto}/{section}/{view}', [NotaController::class, 'showSectionView'])->name('proyectos.section.view');
+    
 
+    Route::get('proyectos/tareas/{proyecto}', [ProyectoController::class, 'proyectoTareas'])->name('proyecto.tareas');
 });

@@ -9,6 +9,17 @@
     <p><strong>Estado:</strong> {{ $proyecto->estado }}</p>
 
     <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Tareas</h5>
+                        <a href="{{route('proyecto.tareas', ['proyecto'=>$proyecto->id])}}" class="btn btn-primary"></a>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="row">
         @foreach(['riesgos' => 'Riesgos', 'presupuestos' => 'Presupuesto', 'notas' => 'Notas', 'tareas' => 'Tareas', 'documentos' => 'Documentos', 'usuarios' => 'Usuarios Asignados'] as $key => $title)
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
