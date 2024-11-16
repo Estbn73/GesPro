@@ -13,6 +13,7 @@ class Tarea extends Model
         'nombre_tarea',
         'descripcion',
         'proyecto_id', 
+        'estado',
     ];
 
     // Definir la relación con el modelo Proyecto
