@@ -15,7 +15,7 @@ class TareaController extends Controller
         // Obtener todas las tareas con su proyecto relacionado y paginarlas
         $tareas = Tarea::with('proyecto')->paginate(10);
         
-        return view('tareas.index', compact('tareas'));
+        return view('notas.index', compact('tareas'));
     }
     
 
@@ -45,7 +45,7 @@ class TareaController extends Controller
         Tarea::create($request->all());
 
         // Redirigir con un mensaje de éxito
-        return redirect()->route('tareas.index')->with('success', 'Tarea creada exitosamente.');
+        return redirect()->route('notas.index')->with('success', 'Tarea creada exitosamente.');
     }
 
     /**
@@ -55,7 +55,7 @@ class TareaController extends Controller
     {
         // Obtener todos los proyectos para el menú desplegable
         $proyectos = Proyecto::all();
-        return view('tareas.edit', compact('tarea', 'proyectos'));
+        return view('notas.edit', compact('tarea', 'proyectos'));
     }
 
     /**
@@ -74,7 +74,7 @@ class TareaController extends Controller
         $tarea->update($request->all());
 
         // Redirigir con un mensaje de éxito
-        return redirect()->route('tareas.index')->with('success', 'Tarea actualizada exitosamente.');
+        return redirect()->route('notas.index')->with('success', 'Tarea actualizada exitosamente.');
     }
 
     /**
@@ -83,6 +83,6 @@ class TareaController extends Controller
     public function destroy(Tarea $tarea)
     {
         $tarea->delete();
-        return redirect()->route('tareas.index')->with('success', 'Tarea eliminada exitosamente.');
+        return redirect()->route('notas.index')->with('success', 'Tarea eliminada exitosamente.');
     }
 }

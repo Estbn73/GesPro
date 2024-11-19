@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,12 +13,19 @@ class Tarea extends Model
         'descripcion',
         'proyecto_id', 
         'estado',
+        'user_id', // Relación con usuarios
+        'prioridad', // Prioridad de la tarea
     ];
 
-    // Definir la relación con el modelo Proyecto
+    // Relación con el modelo Proyecto
     public function proyecto()
     {
         return $this->belongsTo(Proyecto::class, 'proyecto_id');
     }
-}
 
+    // Relación con el modelo User
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+}

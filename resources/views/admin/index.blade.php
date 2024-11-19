@@ -51,7 +51,7 @@
         });
 
         function loadTaskManagement() {
-            fetch('{{ route("tareas.index") }}')
+            fetch('{{ route("notas.index") }}')
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('user-management-container').innerHTML = html;

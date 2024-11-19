@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
     Route::get('documents/view/{id}', [DocumentController::class, 'view'])->name('documents.view');
     Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
-    Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index');
+    Route::get('/tareas', [TareaController::class, 'index'])->name('notas.index');
 
 
     // Rutas para asignar usuario a un proyecto

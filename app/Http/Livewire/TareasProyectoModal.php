@@ -22,20 +22,23 @@ class TareasProyectoModal extends Component
 
     public function actualizarContador()
     {
-        $this->contadorTareasPendientes = $this->proyecto->tareas->where('estado', 0)->count();
+        $usuarioActual = auth()->user(); // Usuario autenticado
+        $this->contadorTareasPendientes = $this->proyecto->tareas
+            ->where('estado', 0)
+            ->where('user_id', $usuarioActual->id)
+            ->count();
     }
 
     public function toggleEstado($tareaId)
     {
         $tarea = Tarea::find($tareaId);
 
-        if ($tarea) {
-            $tarea->estado = !$tarea->estado; // Cambia el estado
+        if ($tarea && $tarea->user_id == auth()->id()) { // Verificar que la tarea pertenece al usuario actual
+            $tarea->estado = !$tarea->estado;
             $tarea->save();
         }
 
-        // Actualiza el contador directamente
-        $this->contadorTareasPendientes = $this->proyecto->tareas->where('estado', 0)->count();
+        $this->actualizarContador(); // Actualiza el contador
     }
 
     public function mostrarTodas()
@@ -50,9 +53,11 @@ class TareasProyectoModal extends Component
 
     public function render()
     {
+        $usuarioActual = auth()->user(); // Usuario autenticado
+
         $tareas = $this->mostrarTodasTareas
-            ? $this->proyecto->tareas 
-            : $this->proyecto->tareas->take(3); // Solo las primeras 3 tareas
+            ? $this->proyecto->tareas->where('user_id', $usuarioActual->id) // Todas las tareas del usuario
+            : $this->proyecto->tareas->where('user_id', $usuarioActual->id)->take(3); // Solo 3 tareas del usuario
 
         $documentos = $this->proyecto->documentos;
 

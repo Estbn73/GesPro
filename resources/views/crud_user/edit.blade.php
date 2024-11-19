@@ -34,25 +34,28 @@
                             <label for="proyectos" class="form-label">Proyectos Asignados:</label>
                             <button type="button" id="toggle-projects" class="btn btn-secondary mb-2">Seleccionar Proyectos</button>
                             <div id="projects-container" style="display: none;">
-                                @foreach($proyectos as $proyecto)
-                                    <div class="form-check">
-                                        <input type="checkbox" name="proyectos[{{ $proyecto->id }}][id]" value="{{ $proyecto->id }}" 
-                                            {{ $user->proyectos->contains($proyecto) ? 'checked' : '' }} 
-                                            id="proyecto_{{ $proyecto->id }}" 
-                                            class="form-check-input">
-                                        <label for="proyecto_{{ $proyecto->id }}" class="form-check-label">{{ $proyecto->nombre }}</label>
+                            @foreach($proyectos as $proyecto)
+                                <div class="form-check">
+                                    <!-- Campo oculto para enviar valor vacío si no está marcado -->
+                                    <input type="hidden" name="proyectos[{{ $proyecto->id }}][id]" value="">
+                                    
+                                    <!-- Checkbox del Proyecto -->
+                                    <input type="checkbox" 
+                                        name="proyectos[{{ $proyecto->id }}][id]" 
+                                        value="{{ $proyecto->id }}" 
+                                        id="proyecto_{{ $proyecto->id }}" 
+                                        class="form-check-input"
+                                        {{ $user->proyectos->contains($proyecto) ? 'checked' : '' }}>
+                                    <label for="proyecto_{{ $proyecto->id }}" class="form-check-label">{{ $proyecto->nombre }}</label>
 
-                                        <!-- Selección del Rol en el proyecto -->
-                                        <select name="proyectos[{{ $proyecto->id }}][rol]" class="form-select mt-1">
-                                            <option value="" disabled>Selecciona un rol</option>
-                                            <option value="1" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider ? 'selected' : '' }}>Líder</option>
-                                            <option value="0" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider === 0 ? 'selected' : '' }}>Desarrollador</option>
-                                        </select>
-
-
-
-                                    </div>
-                                @endforeach
+                                    <!-- Selección del Rol en el Proyecto -->
+                                    <select name="proyectos[{{ $proyecto->id }}][rol]" class="form-select mt-1">
+                                        <option value="" disabled>Selecciona un rol</option>
+                                        <option value="1" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider ? 'selected' : '' }}>Líder</option>
+                                        <option value="0" {{ $user->proyectos->contains($proyecto->id) && $user->proyectos->find($proyecto->id)->pivot->lider === 0 ? 'selected' : '' }}>Desarrollador</option>
+                                    </select>
+                                </div>
+                            @endforeach
                             </div>
                         </div>
 

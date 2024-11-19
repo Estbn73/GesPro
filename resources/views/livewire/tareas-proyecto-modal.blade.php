@@ -12,7 +12,7 @@
     <div wire:loading.remove>
         @if(!$mostrarTodasTareas)
             <!-- Vista inicial con solo 3 tareas -->
-            <h5 class="mt-3">Tareas Pendientes ({{ $contadorTareasPendientes }})</h5>
+            <h5 class="mt-3">Tareas Pendientes Asignadas a Ti ({{ $contadorTareasPendientes }})</h5>
             @if($tareas->count() > 0)
                 <ul class="list-group list-group-flush">
                     @foreach($tareas as $tarea)
@@ -37,7 +37,7 @@
                     <button class="btn btn-sm btn-outline-primary" wire:click="mostrarTodas">Ver más tareas</button>
                 </div>
             @else
-                <p class="text-muted">No hay tareas asignadas a este proyecto.</p>
+                <p class="text-muted">No tienes tareas asignadas a este proyecto.</p>
             @endif
 
             <!-- Documentos Relacionados -->
@@ -60,7 +60,7 @@
         @else
             <!-- Vista con todas las tareas -->
             <button class="btn btn-sm btn-outline-secondary mb-3" wire:click="regresar">← Regresar</button>
-            <h5 class="mt-3">Todas las Tareas Pendientes</h5>
+            <h5 class="mt-3">Todas las Tareas Asignadas a Ti</h5>
             @if($tareas->count() > 0)
                 <ul class="list-group list-group-flush">
                     @foreach($tareas as $tarea)
@@ -82,7 +82,7 @@
                     @endforeach
                 </ul>
             @else
-                <p class="text-muted">No hay tareas asignadas a este proyecto.</p>
+                <p class="text-muted">No tienes tareas asignadas a este proyecto.</p>
             @endif
         @endif
     </div>

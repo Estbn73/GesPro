@@ -52,24 +52,36 @@ class CrudUsersController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'rol' => 'required|in:admin,user',
-            'proyectos' => 'nullable|array', // Permitir que sea nulo
-            'proyectos.*.id' => 'exists:proyectos,id', 
-            'proyectos.*.rol' => 'in:0,1', // Validar que el rol sea 0 o 1
+            'proyectos' => 'nullable|array',
+            'proyectos.*.id' => 'nullable|exists:proyectos,id',
+            'proyectos.*.rol' => 'nullable|in:0,1',
         ]);
     
-        $user->update($request->only(['name', 'email', 'rol']));
+        // Actualizar datos del usuario
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'rol' => $validatedData['rol'],
+        ]);
     
-        foreach ($request->input('proyectos', []) as $data) {
-            $user->proyectos()->syncWithoutDetaching([
-                $data['id'] => ['lider' => (int)$data['rol']] 
-            ]);
+        // Sincronizar proyectos
+        $proyectosData = [];
+        if (!empty($validatedData['proyectos'])) {
+            foreach ($validatedData['proyectos'] as $proyecto) {
+                if (!empty($proyecto['id'])) {
+                    $proyectosData[$proyecto['id']] = ['lider' => $proyecto['rol'] ?? 0];
+                }
+            }
         }
+        $user->proyectos()->sync($proyectosData);
     
         return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente.');
     }
+    
+    
 }
 

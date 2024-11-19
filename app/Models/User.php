@@ -52,5 +52,7 @@ class User extends Authenticatable
                     ->withPivot('lider') 
                     ->withTimestamps();
     }
+
+    
     
 }
