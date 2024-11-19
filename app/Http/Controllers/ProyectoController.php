@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
-use App\Models\Tarea;
 
 class ProyectoController extends Controller
 {
     public function index()
-{
-    $proyectos = Proyecto::all();
-    return view('proyectos.index', compact('proyectos'));
-}
+    {
+        $proyectos = Proyecto::with(['tareas', 'documentos'])->get();
+        return view('proyectos.index', compact('proyectos'));
+    }
 
     public function create()
     {
@@ -63,17 +62,16 @@ class ProyectoController extends Controller
 
     public function show(Proyecto $proyecto)
     {
-        // Cargar los elementos relacionados con el proyecto
-        $proyecto->load(['riesgos', 'presupuesto', 'notas', 'tareas', 'documents', 'equipo']);
+        $proyecto->load(['tareas', 'documentos', 'riesgos', 'presupuesto', 'notas', 'equipo']);
     
         return view('proyectos.show', compact('proyecto'));
     }
     
-    public function proyectoTareas(Proyecto $proyecto) { 
+    public function proyectoTareas(Proyecto $proyecto)
+    {
+        $tareas = $proyecto->tareas;
+        $documentos = $proyecto->documentos;
 
-        //dd($proyecto);
-        $id = $proyecto->id;
-        return view('proyectos.tareas', compact('id'));
+        return view('proyectos.tareas', compact('proyecto', 'tareas', 'documentos'));
     }
-
 }

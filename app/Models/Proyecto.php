@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Document; 
 
 class Proyecto extends Model
 {
@@ -45,13 +46,9 @@ class Proyecto extends Model
         return $this->hasMany(Nota::class);
     }
 
-    public function documents()
+    public function documentos()
     {
-        return $this->hasMany(Document::class);
+        return $this->hasMany(Document::class, 'proyecto_id');
     }
-    
-
-
-
-    
+        
 }

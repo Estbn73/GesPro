@@ -164,3 +164,26 @@ hr {
     border-top: 1px solid #e0e0e0;
     margin: 20px 0;
 }
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button.btn-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+button.btn-secondary {
+    margin-bottom: 15px;
+}

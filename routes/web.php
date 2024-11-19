@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     // Rutas relacionadas a documentos, asociadas a proyectos
     Route::resource('proyectos.documents', DocumentController::class)->shallow();
     Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
+    Route::get('documents/view/{id}', [DocumentController::class, 'view'])->name('documents.view');
     Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
     Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index');
 
