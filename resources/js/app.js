@@ -42,3 +42,15 @@ window.loadModalContent = function (section, view, proyectoId) {
         })
         .catch(error => console.error('Error al cargar el contenido del modal:', error));
 };
+// Funcion de menu lateral
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('toggle-sidebar');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.querySelector('.main-content');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+        mainContent.classList.toggle('expanded');
+        toggleButton.classList.toggle('collapsed');
+    });
+});

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ $proyecto->nombre }}</h1>
+    <h1 class="pt-4">{{ $proyecto->nombre }}</h1>
     <p>{{ $proyecto->descripcion }}</p>
     <p><strong>Fecha de inicio:</strong> {{ $proyecto->fecha_inicio }}</p>
     <p><strong>Fecha de finalización:</strong> {{ $proyecto->fecha_final }}</p>

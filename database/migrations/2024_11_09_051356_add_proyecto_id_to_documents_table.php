@@ -9,16 +9,21 @@ class AddProyectoIdToDocumentsTable extends Migration
     public function up()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->foreignId('proyecto_id')->constrained()->onDelete('cascade');
+            // Verifica si la columna ya existe antes de agregarla
+            if (!Schema::hasColumn('documents', 'proyecto_id')) {
+                $table->foreignId('proyecto_id')->constrained()->onDelete('cascade');
+            }
         });
     }
 
     public function down()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->dropForeign(['proyecto_id']);
-            $table->dropColumn('proyecto_id');
+            // Verifica si la columna existe antes de eliminarla
+            if (Schema::hasColumn('documents', 'proyecto_id')) {
+                $table->dropForeign(['proyecto_id']);
+                $table->dropColumn('proyecto_id');
+            }
         });
     }
 }
-

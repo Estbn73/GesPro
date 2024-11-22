@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,15 +15,16 @@
     <!-- Styles -->
     @livewireStyles
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
+
 <body class="bg-light text-secondary">
     <div id="app" class="d-flex">
         <!-- Sidebar con toggle -->
         @auth
-        <div class="sidebar bg-primary text-white p-3" id="sidebar" style="width: 250px; min-height: 100vh;">
+        <div class="sidebar bg-primary text-white p-3" id="sidebar">
             <h2>GesPro</h2>
             <ul class="nav flex-column">
-                
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link text-white">Gestión de Usuarios</a>
                 </li>
@@ -31,7 +33,7 @@
                 </li>
                 <li class="nav-item mt-3">
                     <a class="nav-link text-white" href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Cerrar sesión
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -42,9 +44,11 @@
         </div>
         @endauth
 
+        <!-- Botón de toggle -->
+        <button id="toggle-sidebar" class="btn btn-secondary">☰</button>
+
         <!-- Contenido Principal -->
         <div class="main-content flex-grow-1 p-4">
-            <button id="toggle-sidebar" class="btn btn-secondary mb-3">☰</button>
             @yield('content')
         </div>
     </div>
@@ -54,4 +58,5 @@
     @yield('scripts') <!-- Incluir cualquier otro script adicional -->
     @livewireScripts <!-- Incluir scripts de Livewire -->
 </body>
+
 </html>

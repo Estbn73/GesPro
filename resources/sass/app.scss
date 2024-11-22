@@ -37,3 +37,39 @@
     }
 }
 
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #003a70;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0); /* Sidebar visible */
+    z-index: 1000;
+}
+
+.sidebar.hidden {
+    transform: translateX(-250px); /* Sidebar oculto */
+}
+
+.main-content {
+    margin-left: 250px; /* Ajusta el contenido con el sidebar visible */
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.expanded {
+    margin-left: 0; /* Ajusta el contenido con el sidebar oculto */
+}
+
+#toggle-sidebar {
+    position: fixed;
+    top: 10px;
+    left: 260px; /* Ajustado para estar junto al sidebar */
+    z-index: 1100;
+    transition: left 0.3s ease-in-out;
+}
+
+#toggle-sidebar.collapsed {
+    left: 10px; /* Ajustado para seguir visible cuando el sidebar está oculto */
+}
