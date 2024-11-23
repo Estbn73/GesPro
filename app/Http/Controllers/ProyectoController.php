@@ -15,7 +15,7 @@ class ProyectoController extends Controller
 
     public function create()
     {
-        return view('crud_proyectos.create');
+        return view('proyectos.create');
     }
 
     public function store(Request $request)
@@ -35,23 +35,27 @@ class ProyectoController extends Controller
 
     public function edit(Proyecto $proyecto)
     {
-        return view('crud_proyectos.edit', compact('proyecto'));
+        return view('proyectos.edit', compact('proyecto'));
     }
 
     public function update(Request $request, Proyecto $proyecto)
     {
-        $request->validate([
+        // Validar los datos del formulario
+        $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'fecha_inicio' => 'required|date',
-            'fecha_final' => 'required|date',
-            'estado' => 'boolean',
+            'fecha_fin' => 'required|date',
+            'estado' => 'required|boolean',
         ]);
-
-        $proyecto->update($request->all());
-        
+    
+        // Actualizar el proyecto en la base de datos
+        $proyecto->update($validated);
+    
+        // Redirigir a la lista de proyectos con un mensaje de éxito
         return redirect()->route('proyectos.index')->with('success', 'Proyecto actualizado exitosamente.');
     }
+    
 
     public function destroy(Proyecto $proyecto)
     {
@@ -67,11 +71,24 @@ class ProyectoController extends Controller
         return view('proyectos.show', compact('proyecto'));
     }
     
-    public function proyectoTareas(Proyecto $proyecto)
+    public function proyectoTareas($id)
     {
-        $tareas = $proyecto->tareas;
-        $documentos = $proyecto->documentos;
+        // Verificar que el proyecto existe
+        $proyecto = Proyecto::findOrFail($id);
+    
+        // Pasar el id del proyecto a la vista
+        return view('proyectos.tareas', ['id' => $id, 'proyectoNombre' => $proyecto->nombre]);
 
-        return view('proyectos.tareas', compact('proyecto', 'tareas', 'documentos'));
     }
+
+    public function proyectoRiesgos($id)
+{
+    $proyecto = Proyecto::findOrFail($id);
+    return view('proyectos.riesgos', [
+        'id' => $id,
+        'proyectoNombre' => $proyecto->nombre,
+    ]);
+}
+
+    
 }

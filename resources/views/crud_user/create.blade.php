@@ -1,12 +1,13 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Crear Usuario</div>
-
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Crear Usuario</h4>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('users.store') }}" method="POST">
                         @csrf
@@ -38,7 +39,14 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary" onclick="history.back();">
+                                <i class="fas fa-arrow-left"></i> Volver
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Crear Usuario
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -46,4 +54,3 @@
     </div>
 </div>
 @endsection
-

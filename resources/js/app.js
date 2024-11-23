@@ -42,3 +42,12 @@ window.loadModalContent = function (section, view, proyectoId) {
         })
         .catch(error => console.error('Error al cargar el contenido del modal:', error));
 };
+
+
+        // Toggle para ocultar y mostrar el sidebar con suavidad
+        const sidebar = document.getElementById('sidebar');
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                sidebar.classList.toggle('hidden');
+            }
+        });

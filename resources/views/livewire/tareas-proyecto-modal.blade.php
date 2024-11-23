@@ -1,4 +1,4 @@
-<div>
+    <div>
     <h4 class="mb-3">{{ $proyecto->nombre }}</h4>
     <p><strong>Descripción:</strong> {{ $proyecto->descripcion }}</p>
     <p><strong>Estado:</strong> {{ $proyecto->estado == 1 ? 'Activo' : 'Inactivo' }}</p>

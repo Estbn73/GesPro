@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('riesgos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('proyecto_id')->constrained()->onDelete('cascade');
-            $table->string('tipo'); // Tipo de riesgo: positivo o negativo
+            $table->string('tipo', 255); // Tipo de riesgo: positivo o negativo
             $table->text('descripcion');
-            $table->integer('impacto')->comment('Nivel de impacto (1-5)');
+            $table->enum('impacto', ['positivo', 'negativo']);
             $table->timestamps();
         });
     }

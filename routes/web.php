@@ -27,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Rutas para gestión de proyectos y sus recursos relacionados
     Route::resource('proyectos', ProyectoController::class);
+    Route::get('proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
+    Route::put('proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
 
     // Rutas relacionadas a documentos, asociadas a proyectos
     Route::resource('proyectos.documents', DocumentController::class)->shallow();
@@ -50,5 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/proyectos/{proyecto}/{section}/{view}', [NotaController::class, 'showSectionView'])->name('proyectos.section.view');
     
 
+    
     Route::get('proyectos/tareas/{proyecto}', [ProyectoController::class, 'proyectoTareas'])->name('proyecto.tareas');
+    Route::get('proyectos/riesgos/{proyecto}', [ProyectoController::class, 'proyectoRiesgos'])->name('proyecto.riesgos');
+
 });

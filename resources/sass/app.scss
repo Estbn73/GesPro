@@ -30,6 +30,10 @@
     color: #ffffff;
 }
 
+h1, h2,h3{
+    color: black;
+}
+/*tarjetas proyectos*/
 .card {
     border-radius: 8px;
     .card-title {
@@ -37,3 +41,73 @@
     }
 }
 
+/*Estilos de botones bootstrap*/
+.btn-primary {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+    color: #fff !important;
+}
+
+.btn-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    color: #fff !important;
+}
+
+.btn-success {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #fff !important;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+.btn-warning {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+/*Estilos Panel lateral*/
+.sidebar {
+    width: 210px;
+    min-height: 100vh;
+    background-color: #0056b3; /* Color de fondo principal */
+    color: #ffffff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease; /* Animación suave */
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.nav-link {
+    display: block; 
+    width: 100%; 
+    padding: 15px 20px; 
+    color: #ffffff; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.nav-link.active {
+    background-color: #004494; 
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    background-color: #00336d; 
+    color: #ffffff;
+}
+
+.logout-link {
+    margin-top: auto; 
+    text-align: center;
+}

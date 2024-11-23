@@ -12,9 +12,11 @@ class Tarea extends Model
     protected $fillable = [
         'nombre_tarea',
         'descripcion',
-        'proyecto_id', 
+        'proyecto_id',
         'estado',
+        'user_id',
     ];
+    
 
     // Definir la relación con el modelo Proyecto
     public function proyecto()
