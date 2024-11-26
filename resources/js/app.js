@@ -78,3 +78,24 @@ window.loadModalContent = function (section, view, proyectoId) {
             }
         }
       });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+        const storedTab = localStorage.getItem('activeTab');
+    
+        if (storedTab) {
+            const tabElement = document.querySelector(storedTab);
+            if (tabElement) {
+                new bootstrap.Tab(tabElement).show();
+            }
+        }
+    
+        tabs.forEach(tab => {
+            tab.addEventListener('shown.bs.tab', (event) => {
+                localStorage.setItem('activeTab', event.target.dataset.bsTarget);
+            });
+        });
+    });
+
+    
+    
