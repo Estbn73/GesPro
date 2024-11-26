@@ -10,6 +10,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
     <!-- Styles -->
     @livewireStyles
@@ -22,19 +24,29 @@
         <div class="sidebar" id="sidebar">
             <h2>GesPro</h2>
             <ul class="nav flex-column">
+                <!-- Icono de Inicio -->
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Inicio</a>
+                    <a href="{{ route('user.home') }}" class="nav-link">
+                        <i class="fas fa-home me-2"></i>Inicio
+                    </a>
                 </li>
+
+                <!-- Icono de Miembros -->
                 <li class="nav-item">
-                    <a href="#services" class="nav-link">Servicios</a>
+                    <a href="{{ route('user.miembros') }}" class="nav-link">
+                        <i class="fas fa-users me-2"></i>Miembros
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contacto</a>
+                    <a href="{{ route('user.calendario') }}" class="nav-link">
+                        <i class="fas fa-calendar-alt me-2"></i>Calendario
+                    </a>
                 </li>
                 <li class="nav-item mt-3">
                     <a class="nav-link" href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Cerrar sesión
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
@@ -42,6 +54,8 @@
                 </li>
             </ul>
         </div>
+
+
         @endauth
 
         <!-- Contenido Principal -->
@@ -52,25 +66,6 @@
     </div>
 
     <!-- Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleSidebar = document.getElementById('toggle-sidebar');
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
-
-            toggleSidebar.addEventListener('click', () => {
-                // Alternar clase "hidden" para mostrar/ocultar el sidebar
-                sidebar.classList.toggle('hidden');
-                
-                // Ajustar el contenido principal según el estado del sidebar
-                if (sidebar.classList.contains('hidden')) {
-                    mainContent.style.marginLeft = '0';
-                } else {
-                    mainContent.style.marginLeft = '250px';
-                }
-            });
-        });
-    </script>
     @vite(['resources/js/app.js'])
     @livewireScripts
 </body>

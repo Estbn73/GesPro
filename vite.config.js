@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/css/fullcalendar.css', // CSS de FullCalendar
+                'resources/js/fullcalendar.js',   // JS de FullCalendar
             ],
             refresh: true,
         }),

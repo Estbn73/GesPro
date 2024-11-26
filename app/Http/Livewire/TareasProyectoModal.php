@@ -8,11 +8,12 @@ use App\Models\Document;
 
 class TareasProyectoModal extends Component
 {
-    public $proyecto; // Proyecto seleccionado
+    public $proyecto; 
     public $mostrarTodasTareas = false; 
     public $contadorTareasPendientes = 0; // Contador de tareas pendientes
+    public $tareaSeleccionada = null; // Tarea seleccionada para ver más
 
-    protected $listeners = ['actualizarContador']; // Escucha eventos específicos
+    protected $listeners = ['actualizarContador']; 
 
     public function mount($proyecto)
     {
@@ -22,20 +23,22 @@ class TareasProyectoModal extends Component
 
     public function actualizarContador()
     {
-        $this->contadorTareasPendientes = $this->proyecto->tareas->where('estado', 0)->count();
+        $this->contadorTareasPendientes = Tarea::where('proyecto_id', $this->proyecto->id)
+            ->where('user_id', auth()->id()) 
+            ->where('estado', 0) 
+            ->count();
     }
 
     public function toggleEstado($tareaId)
     {
         $tarea = Tarea::find($tareaId);
 
-        if ($tarea) {
-            $tarea->estado = !$tarea->estado; // Cambia el estado
+        if ($tarea && $tarea->user_id == auth()->id()) { 
+            $tarea->estado = !$tarea->estado; 
             $tarea->save();
         }
 
-        // Actualiza el contador directamente
-        $this->contadorTareasPendientes = $this->proyecto->tareas->where('estado', 0)->count();
+        $this->actualizarContador(); 
     }
 
     public function mostrarTodas()
@@ -50,9 +53,12 @@ class TareasProyectoModal extends Component
 
     public function render()
     {
-        $tareas = $this->mostrarTodasTareas
-            ? $this->proyecto->tareas 
-            : $this->proyecto->tareas->take(3); // Solo las primeras 3 tareas
+        $tareas = Tarea::where('proyecto_id', $this->proyecto->id)
+            ->where('user_id', auth()->id()) // Filtrar por usuario autenticado
+            ->when(!$this->mostrarTodasTareas, function ($query) {
+                return $query->take(3); 
+            })
+            ->get();
 
         $documentos = $this->proyecto->documentos;
 
@@ -61,4 +67,14 @@ class TareasProyectoModal extends Component
             'documentos' => $documentos,
         ]);
     }
+
+        public function verMasTarea($tareaId)
+        {
+            if ($this->tareaSeleccionada === $tareaId) {
+                $this->tareaSeleccionada = null;
+            } else {
+                $this->tareaSeleccionada = $tareaId;
+            }
+        }
+
 }

@@ -2,16 +2,39 @@
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
 // Variables
-$primary-color: rgb(58, 90, 140); // Color azul del admin
+$primary-color: #0056b3; // Color azul del admin
 $secondary-color: #f8f9fa;
 $text-color: #343a40;
+$card-text-color: #000000; // Color gris por defecto
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+.badge-success {
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+}
+
+.badge-secondary {
+    background-color: #6c757d !important;
+    color: #ffffff !important;
+}
+
+.card-body {
+    color: $card-text-color;
+
+    p {
+        color: $card-text-color;
+    }
+    .card-text {
+        color: $card-text-color;
+    }
+}
+
+
 // Sidebar
 .sidebar {
-    background-color: rgb(58, 90, 140);
+    background-color: #0056b3;
     position: fixed;
     left: 0;
     top: 0;
@@ -32,18 +55,17 @@ $text-color: #343a40;
             color: lighten(#ffffff, 10%);
         }
         &.active {
-            background-color: darken(rgb(58, 90, 140), 10%);
+            background-color: darken(#0056b3, 10%);
         }
     }
 }
 
-// Contenido Principal
 .main-content {
-    margin-left: 250px; // Espacio reservado para el sidebar
+    margin-left: 250px; 
     transition: margin-left 0.3s ease-in-out;
 
     &.expanded {
-        margin-left: 0; // Expandir cuando el sidebar esté oculto
+        margin-left: 0; 
     }
 }
 
@@ -52,7 +74,6 @@ h2{
 }
 
 
-// Botones
 .btn-primary {
     background-color: $primary-color;
     border: none;
@@ -62,7 +83,6 @@ h2{
     }
 }
 
-// Cards
 .card {
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -71,11 +91,9 @@ h2{
         transform: scale(1.02);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-
-    .card-title {
-        font-weight: bold;
-    }
 }
+
+
 /* Estilo del modal */
 .modal-content {
     border-radius: 10px;
@@ -84,8 +102,8 @@ h2{
 }
 
 .modal-header {
-    background-color: #3a5a8c; /* Azul primario */
-    color: #ffffff; /* Texto blanco */
+    background-color: $primary-color; 
+    color: #ffffff; 
     border-bottom: none;
     font-weight: bold;
     padding: 15px 20px;
@@ -102,26 +120,32 @@ h2{
     background-color: #f9f9f9;
 }
 
-/* Lista de tareas */
 .list-group-item {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    display: flex; 
+    align-items: center; 
+    min-height: 70px; 
+    padding: 15px; 
+    border: none; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+
+    &:hover {
+        background-color: #f8f9fa; 
+    }
 }
 
-.list-group-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+.list-group-item p {
+    margin: 0; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
-/* Etiquetas de estado */
+.btn-outline-primary {
+    white-space: nowrap; /* Evita que el texto del botón se divida en varias líneas */
+    font-size: 0.875rem; 
+    height: 35px; 
+    line-height: 1.5; 
+}
+
 .badge {
     padding: 5px 10px;
     border-radius: 20px;
@@ -139,40 +163,6 @@ h2{
     color: #ffffff;
 }
 
-/* Checkbox */
-input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #3a5a8c; /* Cambia el color del checkbox */
-}
-
-/* Títulos */
-h4, h5 {
-    font-weight: bold;
-    color: #343a40; /* Gris oscuro */
-}
-
-/* Espaciado general */
-p {
-    margin: 5px 0;
-    font-size: 0.95rem;
-    color: #6c757d; /* Texto gris */
-}
-
-hr {
-    border-top: 1px solid #e0e0e0;
-    margin: 20px 0;
-}
-.list-group-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.list-group-item input[type="checkbox"] {
-    margin-right: 10px;
-}
 
 button.btn-link {
     text-decoration: none;
@@ -187,3 +177,77 @@ button.btn-link {
 button.btn-secondary {
     margin-bottom: 15px;
 }
+
+/* Checkbox */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #3a5a8c; /* Cambia el color del checkbox */
+}
+
+h4, h5 {
+    font-weight: bold;
+    color: #343a40; 
+}
+
+p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #6c757d; 
+}
+
+hr {
+    border-top: 1px solid #e0e0e0;
+    margin: 20px 0;
+}
+.list-group-item {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-bottom: 10px; /* Espaciado entre tareas */
+    background-color: #fff;
+}
+
+.list-group-item .form-check-label {
+    font-weight: 600; /* Hacer los títulos más visibles */
+}
+
+.list-group-item .bg-light {
+    background-color: #f8f9fa; /* Fondo claro para los detalles adicionales */
+    border: 1px solid #dee2e6; /* Borde distintivo */
+    margin-top: 10px; /* Separar del contenido principal */
+    padding: 8px 12px;
+    border-radius: 0.25rem;
+}
+
+.list-group-item p {
+    margin-bottom: 0.5rem;
+}
+
+
+//ESTILOS DE LOS TABS
+.tab-content > .tab-pane {
+    min-height: 200px; 
+    padding: 1rem; 
+    border: 1px solid #dee2e6; 
+    border-radius: 0.25rem; 
+    background-color: #fff;
+}
+
+.nav-pills .nav-link {
+    min-height: 50px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.nav-pills .nav-link.active {
+    background-color: #0d6efd; 
+    color: white;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #0056b3; 
+    color: white;
+}
+

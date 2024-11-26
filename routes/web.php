@@ -51,6 +51,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/proyectos/{proyecto}/{section}/{view}', [ProyectoController::class, 'loadSectionView'])->name('proyectos.section.view');
     Route::get('/proyectos/{proyecto}/{section}/{view}', [NotaController::class, 'showSectionView'])->name('proyectos.section.view');
     
+    // Rutas para el perfil de desarrollador
+    Route::get('/user/miembros', [UserController::class, 'miembros'])->name('user.miembros');
+    Route::get('/user/calendario', [UserController::class, 'calendario'])->name('user.calendario');
+    Route::get('/eventos', [App\Http\Controllers\CalendarioController::class, 'obtenerEventos'])->name('eventos.obtener');
+    
+
+
 
     
     Route::get('proyectos/tareas/{proyecto}', [ProyectoController::class, 'proyectoTareas'])->name('proyecto.tareas');

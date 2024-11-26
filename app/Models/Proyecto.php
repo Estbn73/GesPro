@@ -24,6 +24,10 @@ class Proyecto extends Model
                     ->withPivot('lider') 
                     ->withTimestamps();
     }
+    public function equipoProyecto()
+    {
+        return $this->hasMany(EquipoProyecto::class, 'proyecto_id');
+    }
 
         public function tareas()
     {
@@ -39,6 +43,13 @@ class Proyecto extends Model
     public function presupuesto()
     {
         return $this->hasOne(Presupuesto::class);
+    }
+
+    public function usuarios()
+    {
+        return $this->belongsToMany(User::class, 'equipo_proyecto')
+                    ->withPivot('lider') 
+                    ->withTimestamps(); 
     }
 
     public function notas()
