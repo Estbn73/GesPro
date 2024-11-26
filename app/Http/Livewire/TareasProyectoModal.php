@@ -67,15 +67,6 @@ class TareasProyectoModal extends Component
             'documentos' => $documentos,
         ]);
     }
-
-    public function verMasTarea($tareaId)
-    {
-        // Cambiar tarea seleccionada
-        $this->tareaSeleccionada = $this->tareaSeleccionada === $tareaId ? null : $tareaId;
-    
-        // No necesitas emitir ningún evento, Livewire actualizará automáticamente la vista.
-    }
-    
     
     
 }

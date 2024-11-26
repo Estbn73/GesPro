@@ -18,6 +18,10 @@ class Tarea extends Model
         'prioridad',
         'fecha_final',
     ];
+    protected $casts = [
+        'fecha_final' => 'datetime',
+    ];
+    
     
 
     // Definir la relación con el modelo Proyecto
