@@ -1,0 +1,20 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colores personalizados
+$primary-color: #3a5a8c;  // Azul claro
+$secondary-color: #2e3d50; // Azul marino oscuro
+$background-color: #f5f5f5; // Gris claro
+$button-color: #2a7a7b;    // Verde grisáceo
+$text-color: #333333;       // Gris oscuro para textos
+
+// Actualización de variables de Bootstrap
+$theme-colors: (
+  "primary": $primary-color,
+  "secondary": $secondary-color,
+);

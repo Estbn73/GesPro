@@ -1,0 +1,161 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+/* Estilos personalizados para el login */
+.container {
+    min-height: 80vh;
+}
+
+.card {
+    border-radius: 8px;
+}
+
+.btn-primary {
+    background-color: #2a7a7b;
+    border: none;
+    &:hover {
+        background-color: darken(#2a7a7b, 10%);
+    }
+}
+
+
+.nav-link.active {
+    background-color: darken($primary-color, 10%);
+    color: #ffffff;
+}
+
+h1, h2,h3{
+    color: black;
+}
+/*tarjetas proyectos*/
+.card {
+    border-radius: 8px;
+    .card-title {
+        font-weight: bold;
+    }
+}
+
+/*Estilos de botones bootstrap*/
+.btn-primary {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+    color: #fff !important;
+}
+
+.btn-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    color: #fff !important;
+}
+
+.btn-success {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #fff !important;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+.btn-warning {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+/*Estilos Panel lateral*/
+.sidebar {
+    width: 210px;
+    min-height: 100vh;
+    background-color: #0056b3; /* Color de fondo principal */
+    color: #ffffff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease; /* Animación suave */
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.nav-link {
+    display: block; 
+    width: 100%; 
+    padding: 15px 20px; 
+    color: #ffffff; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.nav-link.active {
+    background-color: #004494; 
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    background-color: #00336d; 
+    color: #ffffff;
+}
+
+.logout-link {
+    margin-top: auto; 
+    text-align: center;
+}
+
+/* Estilo base de la miga de pan */
+.breadcrumb.custom-breadcrumb {
+    background-color: transparent; /* Fondo transparente */
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    list-style: none;
+    display: flex;
+    gap: 5px;
+    font-size: 0.9rem; /* Tamaño de texto más compacto */
+    align-items: center;
+}
+
+/* Estilo para el separador */
+.breadcrumb.custom-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #000000;
+    margin-right: 5px;
+}
+
+/* Enlaces con diseño limpio */
+.breadcrumb.custom-breadcrumb .breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 2px 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.breadcrumb.custom-breadcrumb .breadcrumb-item a:hover {
+    background-color: #004494; /* Fondo claro al pasar el ratón */
+    color: #ffffff;
+    border-radius: 3px;
+    text-decoration: none;
+   font-weight: bold;
+}
+
+/* Elemento activo (última miga) */
+.breadcrumb.custom-breadcrumb .breadcrumb-item.active {
+    color: #000000; /* Texto oscuro */
+    font-weight: normal;
+    font-style: italic;
+    border-radius: 3px;
+    padding: 2px 8px;
+    margin-left: 5px;
+}
+
+
+
