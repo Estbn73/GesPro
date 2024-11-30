@@ -62,8 +62,8 @@
         <!-- Documentos -->
         <div class="tab-pane fade" id="documentos" role="tabpanel" aria-labelledby="documentos-tab">
             <h5 class="mb-3">Documentos Relacionados</h5>
-            @if($documentos->count() > 0)
-                <ul class="list-group">
+            @if($documentos && $documentos->isNotEmpty())
+            <ul class="list-group">
                     @foreach($documentos as $documento)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span>{{ $documento->name }}</span>

@@ -49,8 +49,17 @@ class User extends Authenticatable
     public function proyectos()
     {
         return $this->belongsToMany(Proyecto::class, 'equipo_proyecto')
-                    ->withPivot('lider') 
-                    ->withTimestamps();
+            ->withPivot('lider')
+            ->withTimestamps();
     }
-    
+
+    public function tareas()
+    {
+        return $this->hasMany(Tarea::class);
+    }
+
+    public function notas()
+    {
+        return $this->hasMany(Nota::class);
+    }
 }

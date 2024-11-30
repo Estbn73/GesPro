@@ -53,6 +53,10 @@
 
         <!-- Contenido Principal -->
         <div class="main-content flex-grow-1 p-4">
+            <!-- Miga de Pan -->
+            @yield('breadcrumb')
+
+            <!-- Contenido -->
             @yield('content')
         </div>
     </div>

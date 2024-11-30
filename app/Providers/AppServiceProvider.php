@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use App\Http\Livewire\ProyectoRiesgoComponent;
+use App\Http\Livewire\ProyectoRiesgosComponent;
+use App\Http\Livewire\ProyectoPresupuestosComponent;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot() :void
     {
-        Livewire::component('proyecto-riesgo-component', \App\Http\Livewire\ProyectoRiesgoComponent::class);
+        Livewire::component('proyecto-riesgos-component', \App\Http\Livewire\ProyectoRiesgosComponent::class);
+        Livewire::component('proyecto-presupuesto-component', \App\Http\Livewire\ProyectoPresupuestosComponent::class);
+
     }
 }   

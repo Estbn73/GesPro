@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('nombre_tarea');
             $table->text('descripcion');
             $table->unsignedBigInteger('proyecto_id'); // Clave foránea a proyectos
+            $table->unsignedBigInteger('user_id'); // Clave foránea a usuarios
             $table->timestamps();
         
-            // Definimos la clave foránea
+            // Definimos las claves foráneas
             $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
-        
     }
 
     /**

@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('file_path');
+            $table->unsignedBigInteger('proyecto_id'); // Relación con la tabla proyectos
             $table->timestamps();
+
+            // Clave foránea
+            $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
         });
-        
     }
 
     /**
@@ -25,6 +28,14 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('documents', function (Blueprint $table) {
+            if (Schema::hasColumn('documents', 'proyecto_id')) {
+                $table->dropForeign(['proyecto_id']); // Intenta eliminar la clave solo si existe
+                $table->dropColumn('proyecto_id'); // Elimina la columna si existe
+            }
+        });
+    
         Schema::dropIfExists('documents');
     }
+    
 };

@@ -9,7 +9,7 @@ class ProyectoController extends Controller
 {
     public function index()
     {
-        $proyectos = Proyecto::with(['tareas', 'documentos'])->get();
+        $proyectos = Proyecto::with(['tareas', 'documents'])->get();
         return view('proyectos.index', compact('proyectos'));
     }
 
@@ -29,7 +29,6 @@ class ProyectoController extends Controller
         ]);
 
         Proyecto::create($request->only(['nombre', 'descripcion', 'fecha_inicio', 'fecha_final', 'estado']));
-        
         return redirect()->route('proyectos.index')->with('success', 'Proyecto creado exitosamente.');
     }
 
@@ -48,47 +47,85 @@ class ProyectoController extends Controller
             'fecha_fin' => 'required|date',
             'estado' => 'required|boolean',
         ]);
-    
+
         // Actualizar el proyecto en la base de datos
         $proyecto->update($validated);
-    
+
         // Redirigir a la lista de proyectos con un mensaje de éxito
         return redirect()->route('proyectos.index')->with('success', 'Proyecto actualizado exitosamente.');
     }
-    
+
 
     public function destroy(Proyecto $proyecto)
     {
         $proyecto->delete();
-        
         return redirect()->route('proyectos.index')->with('success', 'Proyecto eliminado exitosamente.');
     }
 
     public function show(Proyecto $proyecto)
     {
-        $proyecto->load(['tareas', 'documentos', 'riesgos', 'presupuesto', 'notas', 'equipo']);
-    
+        $proyecto->load(['tareas', 'documents', 'riesgos', 'presupuestos', 'notas', 'equipo']);
+
         return view('proyectos.show', compact('proyecto'));
     }
-    
+
     public function proyectoTareas($id)
     {
-        // Verificar que el proyecto existe
         $proyecto = Proyecto::findOrFail($id);
-    
-        // Pasar el id del proyecto a la vista
-        return view('proyectos.tareas', ['id' => $id, 'proyectoNombre' => $proyecto->nombre]);
-
+        return view(
+            'proyectos.tareas',
+            [
+                'id' => $id,
+                'proyectoId' => $proyecto->id,
+                'proyectoNombre' => $proyecto->nombre,
+            ]
+        );
     }
 
     public function proyectoRiesgos($id)
-{
-    $proyecto = Proyecto::findOrFail($id);
-    return view('proyectos.riesgos', [
-        'id' => $id,
-        'proyectoNombre' => $proyecto->nombre,
-    ]);
-}
+    {
+        $proyecto = Proyecto::findOrFail($id);
+        return view('proyectos.riesgos', [
+            'id' => $id,
+            'proyectoId' => $proyecto->id,
+            'proyectoNombre' => $proyecto->nombre,
+        ]);
+    }
 
-    
+    public function proyectoPresupuestos($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+
+        return view('proyectos.presupuestos2', [
+            'id' => $id,
+            'proyectoId' => $proyecto->id,
+            'proyectoNombre' => $proyecto->nombre,
+        ]);
+    }
+
+    public function proyectoNotas($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+
+        // dd($proyecto);
+
+        return view('proyectos.notas', [
+            'id' => $id,
+            'proyectoId' => $proyecto->id,
+            'proyectoNombre' => $proyecto->nombre,
+        ]);
+    }
+
+    public function proyectoDocumentos($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+
+        // dd($proyecto);
+
+        return view('proyectos.documentos', [
+            'id' => $id,
+            'proyectoId' => $proyecto->id,
+            'proyectoNombre' => $proyecto->nombre,
+        ]);
+    }
 }

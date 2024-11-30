@@ -63,4 +63,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('proyectos/tareas/{proyecto}', [ProyectoController::class, 'proyectoTareas'])->name('proyecto.tareas');
     Route::get('proyectos/riesgos/{proyecto}', [ProyectoController::class, 'proyectoRiesgos'])->name('proyecto.riesgos');
 
+
+    // Rutas adicionales para vista de carga dinámica de cada sección (si necesitas)
+    Route::get('/proyectos/{proyecto}/{section}/{view}', [ProyectoController::class, 'loadSectionView'])->name('proyectos.section.view');
+    Route::get('/proyectos/{proyecto}/{section}/{view}', [NotaController::class, 'showSectionView'])->name('proyectos.section.view');
+
+
+    //vistas livewire
+    Route::get('proyectos/tareas/{proyecto}', [ProyectoController::class, 'proyectoTareas'])->name('proyecto.tareas');
+    Route::get('proyectos/riesgos/{proyecto}', [ProyectoController::class, 'proyectoRiesgos'])->name('proyecto.riesgos');
+    Route::get('proyectos/presupuestos/{proyecto}', [ProyectoController::class, 'proyectoPresupuestos'])->name('proyecto.presupuestos');
+    Route::get('proyectos/notas/{proyecto}', [ProyectoController::class, 'proyectoNotas'])->name('proyecto.notas');
+    Route::get('proyectos/notas/{proyecto}', [ProyectoController::class, 'proyectoNotas'])->name('proyecto.notas');
+    Route::get('proyectos/documentos/{proyecto}', [ProyectoController::class, 'proyectoDocumentos'])->name('proyecto.documentos');
 });

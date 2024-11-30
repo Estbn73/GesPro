@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Document; 
+use App\Models\Document;
 
 class Proyecto extends Model
 {
     protected $fillable = [
-        'nombre',        
-        'descripcion',   
-        'fecha_inicio',  
-        'fecha_final',  
-        'estado',        
+        'nombre',
+        'descripcion',
+        'fecha_inicio',
+        'fecha_final',
+        'estado',
     ];
 
     use HasFactory;
@@ -35,21 +35,14 @@ class Proyecto extends Model
         return $this->hasMany(Tarea::class);
     }
 
-        public function riesgos()
+    public function riesgos()
     {
         return $this->hasMany(Riesgo::class);
     }
 
-    public function presupuesto()
+    public function presupuestos()
     {
-        return $this->hasOne(Presupuesto::class);
-    }
-
-    public function usuarios()
-    {
-        return $this->belongsToMany(User::class, 'equipo_proyecto')
-                    ->withPivot('lider') 
-                    ->withTimestamps(); 
+        return $this->hasMany(Presupuesto::class);
     }
 
     public function notas()
@@ -57,9 +50,8 @@ class Proyecto extends Model
         return $this->hasMany(Nota::class);
     }
 
-    public function documentos()
+    public function documents()
     {
-        return $this->hasMany(Document::class, 'proyecto_id');
+        return $this->hasMany(Document::class);
     }
-        
 }

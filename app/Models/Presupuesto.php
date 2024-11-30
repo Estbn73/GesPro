@@ -9,9 +9,14 @@ class Presupuesto extends Model
 {
     use HasFactory;
 
-    public function proyecto()
-{
-    return $this->belongsTo(Proyecto::class);
-}
+    protected $fillable = [
+        'proyecto_id',
+        'monto',
+        'descripcion'
+    ];
 
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class);
+    }
 }

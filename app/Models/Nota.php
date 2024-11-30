@@ -9,9 +9,19 @@ class Nota extends Model
 {
     use HasFactory;
 
-    public function proyecto()
-{
-    return $this->belongsTo(Proyecto::class);
-}
+    protected $fillable = [
+        'contenido',
+        'proyecto_id',
+        'user_id'
+    ];
 
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

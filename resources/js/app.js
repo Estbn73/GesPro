@@ -51,34 +51,3 @@ window.loadModalContent = function (section, view, proyectoId) {
                 sidebar.classList.toggle('hidden');
             }
         });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleSidebar = document.getElementById('toggle-sidebar');
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
-
-            toggleSidebar.addEventListener('click', () => {
-                sidebar.classList.toggle('hidden');
-                
-                if (sidebar.classList.contains('hidden')) {
-                    mainContent.style.marginLeft = '0';
-                } else {
-                    mainContent.style.marginLeft = '250px';
-                }
-            });
-        });
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            // Detecta si hay un modal abierto
-            const modalOpen = document.querySelector('.modal.show');
-
-            if (modalOpen) {
-                modalOpen.querySelector('[data-bs-dismiss="modal"]').click();
-                event.stopImmediatePropagation(); 
-            }
-        }
-      });
-
-
-    
-    

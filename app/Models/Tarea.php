@@ -29,5 +29,11 @@ class Tarea extends Model
     {
         return $this->belongsTo(Proyecto::class, 'proyecto_id');
     }
+
+        public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
 
