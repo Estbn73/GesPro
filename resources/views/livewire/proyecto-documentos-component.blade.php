@@ -31,7 +31,7 @@
                             <button wire:click="setItem({{ $documento->id }})" class="btn btn-sm btn-warning">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button wire:click="eliminarDocumento({{ $documento->id }})" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este documento?')">
+                            <button x-on:click="if (confirm('¿Estás seguro de eliminar este documento?')) { $wire.eliminarDocumento({{ $documento->id }}) }" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </button>
                         </td>

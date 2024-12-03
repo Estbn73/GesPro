@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class NotaController extends Controller
 {
     // Listar notas de un proyecto
-    public function index(Proyecto $proyecto)
+    public function indexNotas(Proyecto $proyecto)
     {
         $items = $proyecto->notas; // Obtener las notas del proyecto
         $section = 'notas'; // Nombre de la sección actual

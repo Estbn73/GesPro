@@ -26,9 +26,10 @@
                             <button class="btn btn-sm btn-warning" wire:click="setItem({{ $nota->id }})">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button wire:click="eliminarNota({{ $nota->id }})" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta nota?')">
+                            <button x-on:click="if (confirm('¿Estás seguro de eliminar esta nota?')) { $wire.eliminarNota({{ $nota->id }}) }" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </button>
+
                         </td>
                     </tr>
                     @endforeach

@@ -1,40 +1,39 @@
 <div x-data="{showModal: $wire.entangle('showModal')}">
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Gestión de Riesgos</h5>
+            <h5 class="mb-0">Gestión de Equipo del Proyecto</h5>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-success mb-3 " x-on:click="showModal=true">
-                <i class="fas fa-plus"></i> Agregar Riesgo
+            <button type="button" class="btn btn-success mb-3" x-on:click="showModal=true">
+                <i class="fas fa-plus"></i> Agregar Miembro
             </button>
             <table class="table table-hover table-striped">
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Descripción</th>
-                        <th>Impacto</th>
+                        <th>Usuario</th>
+                        <th>Líder</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($riesgos as $riesgo)
+                    @foreach($equipo as $miembro)
                     <tr>
-                        <td>{{ $riesgo->id }}</td>
-                        <td>{{ $riesgo->tipo }}</td>
-                        <td>{{ $riesgo->descripcion }}</td>
-                        <td>{{ $riesgo->impacto }}</td>
+                        <td>{{ $miembro->id }}</td>
+                        <td>{{ $miembro->name ?? 'Usuario no encontrado' }}</td>
+                        <td>{{ $miembro->pivot->lider ? 'Sí' : 'No' }}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning" wire:click="setItem({{ $riesgo->id }})">
+                            <button class="btn btn-sm btn-warning" wire:click="setItem({{ $miembro->id }})">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button x-on:click="if (confirm('¿Estás seguro de eliminar este riesgo?')) { $wire.eliminarRiesgo({{ $riesgo->id }}) }" class="btn btn-sm btn-danger">
+                            <button x-on:click="if (confirm('¿Estás seguro de eliminar a este miembro?')) { $wire.eliminarMiembro({{ $miembro->id }}) }" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </button>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
+
             </table>
         </div>
     </div>
@@ -50,28 +49,26 @@
             <div class="modal-content">
                 <form wire:submit.prevent="guardar">
                     <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">Gestionar Riesgo</h5>
+                        <h5 class="modal-title">Gestionar Miembro del Proyecto</h5>
                         <button type="button" class="btn-close" aria-label="Close" x-on:click="showModal=false" wire:click="cerrarModal"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="tipo" class="form-label">Riesgo</label>
-                            <input type="text" id="tipo" class="form-control" wire:model="tipo" placeholder="Ingrese el nombre del riesgo">
-                        </div>
-                        <div class="mb-3">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea id="descripcion" class="form-control" wire:model="descripcion" rows="3" placeholder="Ingrese la descripción del riesgo"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="impacto" class="form-label">Impacto:</label>
-                            <select id="impacto" class="form-select" wire:model="impacto">
-                                <option hidden selected>Selecciona un Impacto</option>
-                                <option value="positivo">Positivo</option>
-                                <option value="negativo">Negativo</option>
+                            <label for="user_id" class="form-label">Usuario</label>
+                            <select id="user_id" class="form-control" wire:model="user_id">
+                                <option value="">Seleccione un usuario</option>
+                                @foreach($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-
-
+                        <div class="mb-3">
+                            <label for="lider" class="form-label">¿Es Líder?</label>
+                            <select id="lider" class="form-control" wire:model="lider">
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" x-on:click="showModal=false" wire:click="cerrarModal">Cerrar</button>

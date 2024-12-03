@@ -32,7 +32,7 @@
                             <button class="btn btn-sm btn-warning" wire:click="setItem({{ $tarea->id }})">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button wire:click="eliminarTarea({{ $tarea->id }})" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta tarea?')">
+                            <button x-on:click="if (confirm('¿Estás seguro de eliminar esta tareas?')) { $wire.eliminarTareas({{ $tarea->id }}) }" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </button>
                         </td>

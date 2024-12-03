@@ -10,6 +10,8 @@ use App\Http\Controllers\TareaController;
 use App\Http\Controllers\RiesgoController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\NotaController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -17,6 +19,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+//Recuperar Contraseña 
+Route::get('/password/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -46,17 +54,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('proyectos.riesgos', RiesgoController::class)->shallow();
     Route::resource('proyectos.presupuesto', PresupuestoController::class)->shallow();
     Route::resource('proyectos.notas', NotaController::class);
-    
+
     // Rutas adicionales para vista de carga dinámica de cada sección (si necesitas)
     Route::get('/proyectos/{proyecto}/{section}/{view}', [ProyectoController::class, 'loadSectionView'])->name('proyectos.section.view');
     Route::get('/proyectos/{proyecto}/{section}/{view}', [NotaController::class, 'showSectionView'])->name('proyectos.section.view');
-    
+
     // Rutas para el perfil de desarrollador
     Route::get('/user/miembros', [UserController::class, 'miembros'])->name('user.miembros');
     Route::get('/user/calendario', [UserController::class, 'calendario'])->name('user.calendario');
     Route::get('/eventos', [App\Http\Controllers\CalendarioController::class, 'obtenerEventos'])->name('eventos.obtener');
 
-     
+
     Route::get('proyectos/tareas/{proyecto}', [ProyectoController::class, 'proyectoTareas'])->name('proyecto.tareas');
     Route::get('proyectos/riesgos/{proyecto}', [ProyectoController::class, 'proyectoRiesgos'])->name('proyecto.riesgos');
 
@@ -73,4 +81,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('proyectos/notas/{proyecto}', [ProyectoController::class, 'proyectoNotas'])->name('proyecto.notas');
     Route::get('proyectos/notas/{proyecto}', [ProyectoController::class, 'proyectoNotas'])->name('proyecto.notas');
     Route::get('proyectos/documentos/{proyecto}', [ProyectoController::class, 'proyectoDocumentos'])->name('proyecto.documentos');
+    Route::get('proyectos/equipos/{proyecto}', [ProyectoController::class, 'proyectoEquipos'])->name('proyecto.equipos');
+
+
+    
 });

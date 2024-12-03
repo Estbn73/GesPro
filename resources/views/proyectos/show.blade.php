@@ -66,6 +66,15 @@
             </div>
         </div>
 
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Equipo</h5>
+                    <a href="{{ route('proyecto.equipos', ['proyecto' => $proyecto->id]) }}" class="btn btn-primary"> Ver Más</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

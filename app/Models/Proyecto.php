@@ -20,7 +20,7 @@ class Proyecto extends Model
 
     public function equipo()
     {
-        return $this->belongsToMany(User::class, 'equipo_proyecto')
+        return $this->belongsToMany(User::class, 'equipo_proyecto' , 'proyecto_id', 'user_id')
                     ->withPivot('lider') 
                     ->withTimestamps();
     }
@@ -53,4 +53,5 @@ class Proyecto extends Model
     {
         return $this->hasMany(Document::class);
     }
+
 }

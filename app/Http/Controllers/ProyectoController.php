@@ -128,4 +128,19 @@ class ProyectoController extends Controller
             'proyectoNombre' => $proyecto->nombre,
         ]);
     }
+
+    public function proyectoEquipos($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+
+        // dd($proyecto);
+
+        return view('proyectos.equipos', [
+            'id' => $id,
+            'proyectoId' => $proyecto->id,
+            'proyectoNombre' => $proyecto->nombre,
+        ]);
+    }
+
+
 }
