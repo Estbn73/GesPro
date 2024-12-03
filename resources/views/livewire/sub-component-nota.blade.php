@@ -7,35 +7,57 @@
             {{ session('mensajeExito') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @elseif (session()->has('mensajeError'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('mensajeError') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
     @endif
 
-    <!-- Botones de Agregar Nota y Ver Más Notas -->
+    <!-- Botones de acciones -->
     <div class="d-flex flex-wrap gap-3 mb-4">
+        <!-- Botón para abrir el formulario -->
         <button class="btn btn-primary" wire:click="$set('mostrarFormulario', true)">
-            <i class="bi bi-plus-circle me-2"></i> 
-            {{ $notaIdEditando ? 'Editar Nota' : 'Agregar Nota' }}
+            <i class="bi bi-plus-circle me-2"></i> Agregar Nota
         </button>
+
+        <!-- Botón para alternar entre mostrar todas o limitar -->
         <button class="btn btn-outline-primary" wire:click="toggleMostrarTodas">
-            <i class="bi bi-eye me-2"></i>
+            <i class="bi bi-eye me-2"></i> 
             {{ $mostrarTodas ? 'Mostrar Menos' : 'Ver Más Notas' }}
         </button>
     </div>
 
-    <!-- Cuadro de Búsqueda (Visible solo si se muestran todas las notas) -->
+    <!-- Cuadro de búsqueda -->
     @if ($mostrarTodas)
-        <div class="mb-3">
-            <!-- Cuadro de búsqueda -->
+        <div class="mb-3 position-relative">
             <input 
                 type="text" 
                 class="form-control shadow-sm" 
                 wire:model.debounce.500ms="busqueda" 
-                placeholder="Filtrar por contenido, autor o fecha (YYYY-MM-DD)">
+                placeholder="Buscar por contenido, autor o fecha (YYYY-MM-DD)">
+            <div wire:loading wire:target="busqueda" class="spinner-border text-primary position-absolute top-50 end-0 translate-middle-y" role="status" style="width: 1rem; height: 1rem;">
+                <span class="visually-hidden">Buscando...</span>
+            </div>
+        </div>
+    @endif
 
+    <!-- Formulario de Agregar Nota -->
+    @if ($mostrarFormulario)
+        <div class="card mb-4">
+            <div class="card-body">
+                <h6 class="mb-3">Nueva Nota</h6>
+                <div class="mb-3">
+                    <textarea 
+                        wire:model="nuevaNota" 
+                        class="form-control mb-2" 
+                        placeholder="Escribe el contenido de la nota aquí..." 
+                        rows="3"></textarea>
+                    @error('nuevaNota') 
+                        <span class="text-danger">{{ $message }}</span> 
+                    @enderror
+
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-success" wire:click="agregarNota">Guardar</button>
+                        <button class="btn btn-secondary" wire:click="$set('mostrarFormulario', false)">Cancelar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     @endif
 
@@ -63,12 +85,22 @@
                             </td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button class="btn btn-warning btn-sm d-flex align-items-center" wire:click="editarNota({{ $nota->id }})" title="Editar">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm d-flex align-items-center" onclick="confirmarEliminar({{ $nota->id }})" title="Eliminar">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                                    @if ($nota->user_id === auth()->id())
+                                        <button 
+                                            class="btn btn-warning btn-sm d-flex align-items-center" 
+                                            wire:click="editarNota({{ $nota->id }})" 
+                                            title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button 
+                                            class="btn btn-danger btn-sm d-flex align-items-center" 
+                                            onclick="confirmarEliminar({{ $nota->id }})" 
+                                            title="Eliminar">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    @else
+                                        <span class="text-muted">Sin permisos</span>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
