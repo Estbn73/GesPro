@@ -13,6 +13,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Formato</th>
+                        <th>Subido por</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -22,6 +23,7 @@
                         <td>{{ $documento->id }}</td>
                         <td>{{ $documento->name }}</td>
                         <td>{{ strtoupper($documento->extension ?? 'N/A') }}</td>
+                        <td>{{ $documento->user->name ?? 'Usuario desconocido' }}</td>
                         <td>
                             <button wire:click="descargarDocumento({{ $documento->id }})" class="btn btn-sm btn-info">
                                 <i class="fas fa-download"></i> Descargar
@@ -36,7 +38,6 @@
                     </tr>
                     @endforeach
                 </tbody>
-
             </table>
         </div>
     </div>
@@ -64,7 +65,6 @@
                             <label for="file" class="form-label">Archivo</label>
                             <input type="file" id="file" class="form-control" wire:model="file" accept=".pdf,.doc,.docx,.xlsx,.csv">
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" x-on:click="showModal=false" wire:click="limpiarCampos">Cerrar</button>

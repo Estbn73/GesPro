@@ -8,7 +8,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 
-
 class ProyectoDocumentosComponent extends Component
 {
     use WithFileUploads;
@@ -29,8 +28,6 @@ class ProyectoDocumentosComponent extends Component
             return $document;
         });
     }
-    
-    
 
     public function render()
     {
@@ -43,12 +40,13 @@ class ProyectoDocumentosComponent extends Component
             'name' => 'required|string|max:255',
             'file' => 'required|file|mimes:pdf,doc,docx,xlsx,csv|max:10240', // Máximo: 10MB
         ]);
-        
+
         if ($this->document_id) {
             $document = Document::find($this->document_id);
         } else {
             $document = new Document();
             $document->proyecto_id = $this->proyecto->id;
+            $document->user_id = auth()->id(); // Asignar el usuario autenticado
         }
 
         $document->name = $this->name;
@@ -87,7 +85,6 @@ class ProyectoDocumentosComponent extends Component
         if ($document->file_path && Storage::disk('public')->exists($document->file_path)) {
             Storage::disk('public')->delete($document->file_path);
         }
-        
 
         $document->delete();
 
@@ -98,22 +95,20 @@ class ProyectoDocumentosComponent extends Component
     public function descargarDocumento($id)
     {
         $document = Document::findOrFail($id);
-    
+
         // Verificar si el archivo existe en el disco
         if (Storage::disk('public')->exists($document->file_path)) {
             // Construir la ruta física del archivo manualmente
             $filePath = storage_path('app/public/' . $document->file_path);
             $fileName = $document->name; // Nombre amigable desde la base de datos
-    
+
             return response()->download($filePath, $fileName, [
                 'Content-Type' => mime_content_type($filePath),
             ]);
         }
-    
+
         // Mensaje de error si el archivo no existe
         session()->flash('error', 'El archivo no se encuentra en el servidor.');
         return back();
     }
-    
-    
 }

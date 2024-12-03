@@ -37,10 +37,12 @@ class DocumentosComponent extends Component
         $filePath = $this->archivo->store('documents');
 
         Document::create([
-            'name' => $this->nombreDocumento,
-            'file_path' => $filePath,
-            'proyecto_id' => $this->proyectoId,
+            'name' => $this->name,
+            'file_path' => $path,
+            'proyecto_id' => $this->proyecto->id,
+            'user_id' => auth()->id(),
         ]);
+        
 
         $this->reset(['nombreDocumento', 'archivo']);
         $this->cargarDocumentos();

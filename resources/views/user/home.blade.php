@@ -13,11 +13,11 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $proyecto->nombre }}</h5>
                             <p class="card-text ">{{ $proyecto->descripcion }}</p>
-                            <p><strong>Fecha Inicio:</strong> {{ $proyecto->fecha_inicio }}</p>
-                            <p><strong>Fecha Final:</strong> {{ $proyecto->fecha_final }}</p>
+                            <p><strong>Fecha Inicio:</strong> {{ \Carbon\Carbon::parse($proyecto->fecha_inicio)->format('d/m/Y') }}</p>
+                            <p><strong>Fecha Final:</strong> {{ \Carbon\Carbon::parse($proyecto->fecha_final)->format('d/m/Y') }}</p>
                             <p>
                                 <strong>Estado:</strong> 
-                                <span class="badge {{ $proyecto->estado == 1 ? 'badge-success' : 'badge-secondary' }}">
+                                <span class="badge {{ $proyecto->estado == 1 ? 'bg-success' : 'bg-secondary' }}">
                                     {{ $proyecto->estado == 1 ? 'Activo' : 'Inactivo' }}
                                 </span>
                             </p>

@@ -40,47 +40,78 @@
                 <i class="fas fa-folder me-2"></i> Documentos
             </button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button 
+                class="nav-link" 
+                id="presupuesto-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#presupuesto" 
+                type="button" 
+                role="tab" 
+                aria-controls="presupuesto" 
+                aria-selected="false">
+                <i class="fas fa-dollar-sign me-2"></i> Presupuesto
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button 
+                class="nav-link" 
+                id="notas-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#notas" 
+                type="button" 
+                role="tab" 
+                aria-controls="notas" 
+                aria-selected="false">
+                <i class="fas fa-sticky-note me-2"></i> Notas
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button 
+                class="nav-link" 
+                id="riesgo-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#riesgo" 
+                type="button" 
+                role="tab" 
+                aria-controls="riesgo" 
+                aria-selected="false">
+                <i class="fas fa-exclamation-triangle me-2"></i> Riesgos
+            </button>
+        </li>
     </ul>
 
     <!-- Contenido de las Tabs -->
     <div class="tab-content mt-3">
         <!-- Información General -->
         <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-            <p><strong>Descripción:</strong> {{ $proyecto->descripcion }}</p>
-            <p><strong>Estado:</strong> {{ $proyecto->estado == 1 ? 'Activo' : 'Inactivo' }}</p>
-            <p><strong>Fecha Inicio:</strong> {{ $proyecto->fecha_inicio }}</p>
-            <p><strong>Fecha Final:</strong> {{ $proyecto->fecha_final }}</p>
+             @livewire('sub-component-informacion', ['proyecto' => $proyecto])
         </div>
 
         <!-- Tareas -->
         <div class="tab-pane fade" id="tareas" role="tabpanel" aria-labelledby="tareas-tab">
-            @livewire('tareas-component', ['proyectoId' => $proyecto->id])
+            @livewire('sub-component-tareas', ['proyectoId' => $proyecto->id])
         </div>
-
-
 
         <!-- Documentos -->
         <div class="tab-pane fade" id="documentos" role="tabpanel" aria-labelledby="documentos-tab">
-            <h5 class="mb-3">Documentos Relacionados</h5>
-            @if($documentos && $documentos->isNotEmpty())
-            <ul class="list-group">
-                    @foreach($documentos as $documento)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>{{ $documento->name }}</span>
-                            <a href="{{ route('documents.view', $documento->id) }}" target="_blank" class="btn btn-sm btn-primary">
-                                Ver Documento
-                            </a>
-                            <a href="{{ route('documents.download', $documento->id) }}" class="btn btn-sm btn-secondary">
-                                Descargar
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-                <p class="text-muted">No hay documentos relacionados con este proyecto.</p>
-            @endif
+            @livewire('sub-component-documentos', ['proyectoId' => $proyecto->id])
         </div>
+
+        <!-- Presupuesto -->
+        <div class="tab-pane fade" id="presupuesto" role="tabpanel" aria-labelledby="presupuesto-tab">
+            @livewire('sub-component-presupuesto', ['proyectoId' => $proyecto->id])
+        </div>
+
+        <!-- Notas -->
+        <div class="tab-pane fade" id="notas" role="tabpanel" aria-labelledby="notas-tab">
+            @livewire('sub-component-nota', ['proyectoId' => $proyecto->id])
+        </div>
+
+        <!-- Riesgos -->
+        <div class="tab-pane fade" id="riesgo" role="tabpanel" aria-labelledby="riesgo-tab">
+            @livewire('sub-component-riesgo', ['proyectoId' => $proyecto->id])
+        </div>
+
     </div>
 </div>
-
-
