@@ -25,7 +25,6 @@ class SubComponentTareas extends Component
 
     private function contarTareasPendientes()
     {
-        // Contar las tareas pendientes del usuario autenticado
         return Tarea::where('estado', 0)
             ->where('user_id', Auth::id()) 
             ->count();
@@ -44,8 +43,6 @@ class SubComponentTareas extends Component
             // Cambiar el estado solo si pertenece al usuario autenticado
             $tarea->estado = !$tarea->estado;
             $tarea->save();
-
-            // Actualizar el contador directamente
             $this->contadorTareasPendientes = $this->contarTareasPendientes();
         }
     }

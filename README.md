@@ -14,7 +14,7 @@ Este archivo `README.md` proporciona una guía paso a paso sobre cómo ejecutar 
 ### 1. Clonar el Repositorio
 Clona el repositorio del proyecto y accede al directorio:
 ```bash
-https://github.com/Estbn73/GesPro.git
+git clone https://github.com/Estbn73/GesPro.git
 cd GesPro
 ```
 

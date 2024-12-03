@@ -16,6 +16,7 @@ class Tarea extends Model
         'estado',
         'user_id',
         'prioridad',
+        'fecha_inicio',
         'fecha_final',
     ];
     protected $casts = [

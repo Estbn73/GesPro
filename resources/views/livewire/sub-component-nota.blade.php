@@ -26,11 +26,12 @@
     <!-- Cuadro de búsqueda -->
     @if ($mostrarTodas)
         <div class="mb-3 position-relative">
-            <input 
-                type="text" 
-                class="form-control shadow-sm" 
-                wire:model.debounce.500ms="busqueda" 
-                placeholder="Buscar por contenido, autor o fecha (YYYY-MM-DD)">
+        <input 
+            type="text" 
+            class="form-control shadow-sm" 
+            wire:model.lazy="busqueda" 
+            placeholder="Buscar por contenido, autor o fecha (YYYY-MM-DD)">
+
             <div wire:loading wire:target="busqueda" class="spinner-border text-primary position-absolute top-50 end-0 translate-middle-y" role="status" style="width: 1rem; height: 1rem;">
                 <span class="visually-hidden">Buscando...</span>
             </div>

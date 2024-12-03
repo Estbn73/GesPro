@@ -3,10 +3,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
 document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
+    const calendarEl = document.getElementById('calendar');
 
     if (calendarEl) {
-        var calendar = new Calendar(calendarEl, {
+        const calendar = new Calendar(calendarEl, {
             plugins: [dayGridPlugin, timeGridPlugin],
             initialView: 'dayGridMonth',
             headerToolbar: {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            events: '/eventos', // Ruta para obtener los eventos desde Laravel
+            events: eventosUrl, // Usar la URL dinámica generada desde Blade
             eventColor: '#3788d8', // Color por defecto
             eventTextColor: '#ffffff', // Texto blanco en los eventos
         });

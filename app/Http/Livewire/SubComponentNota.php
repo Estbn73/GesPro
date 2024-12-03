@@ -10,10 +10,10 @@ class SubComponentNota extends Component
     public $proyectoId;
     public $nuevaNota;
     public $busqueda = ''; // Filtro de búsqueda
-    public $notaIdEditando = null; // ID de la nota que se está editando
+    public $notaIdEditando = null; 
     public $mostrarFormulario = false; 
     public $mostrarTodas = false; 
-    public $notas = []; // Inicializamos como arreglo vacío
+    public $notas = []; 
 
     public function mount($proyectoId)
     {

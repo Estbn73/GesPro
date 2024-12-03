@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/miembros', [UserController::class, 'miembros'])->name('user.miembros');
     Route::get('/user/calendario', [UserController::class, 'calendario'])->name('user.calendario');
     Route::get('/eventos', [App\Http\Controllers\CalendarioController::class, 'obtenerEventos'])->name('eventos.obtener');
+
      
     Route::get('proyectos/tareas/{proyecto}', [ProyectoController::class, 'proyectoTareas'])->name('proyecto.tareas');
     Route::get('proyectos/riesgos/{proyecto}', [ProyectoController::class, 'proyectoRiesgos'])->name('proyecto.riesgos');

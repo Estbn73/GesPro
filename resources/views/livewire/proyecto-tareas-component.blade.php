@@ -4,7 +4,7 @@
             <h5 class="mb-0">Gestión de Tareas</h5>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-success mb-3 " x-on:click="showModal=true">
+            <button type="button" class="btn btn-success mb-3" x-on:click="showModal=true">
                 <i class="fas fa-plus"></i> Agregar Tarea
             </button>
             <table class="table table-hover table-striped">
@@ -13,6 +13,8 @@
                         <th>ID</th>
                         <th>Nombre de la Tarea</th>
                         <th>Descripción</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Final</th>
                         <th>Usuario Designado</th>
                         <th>Acciones</th>
                     </tr>
@@ -23,6 +25,8 @@
                         <td>{{ $tarea->id }}</td>
                         <td>{{ $tarea->nombre_tarea }}</td>
                         <td>{{ $tarea->descripcion }}</td>
+                        <td>{{ \Carbon\Carbon::parse($tarea->fecha_inicio)->format('Y-m-d') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($tarea->fecha_final)->format('Y-m-d') }}</td>
                         <td>{{ $tarea->user_id ? \App\Models\User::find($tarea->user_id)->name : 'Sin asignar' }}</td>
                         <td>
                             <button class="btn btn-sm btn-warning" wire:click="setItem({{ $tarea->id }})">
@@ -61,6 +65,14 @@
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción</label>
                             <textarea id="descripcion" class="form-control" wire:model="descripcion" rows="3" placeholder="Ingrese la descripción de la tarea"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+                            <input type="date" id="fecha_inicio" class="form-control" wire:model="fecha_inicio">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_final" class="form-label">Fecha Final</label>
+                            <input type="date" id="fecha_final" class="form-control" wire:model="fecha_final">
                         </div>
                         <div class="mb-3">
                             <label for="user_id" class="form-label">Asignar a Usuario</label>

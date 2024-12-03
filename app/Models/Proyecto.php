@@ -32,7 +32,6 @@ class Proyecto extends Model
         public function tareas()
     {
         return $this->hasMany(Tarea::class, 'proyecto_id');
-        return $this->hasMany(Tarea::class);
     }
 
     public function riesgos()

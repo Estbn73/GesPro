@@ -1,3 +1,16 @@
+.circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+/* Espaciado adicional para alineación perfecta */
+.d-flex.align-items-center {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 /* General */
 .fc-toolbar-title {
     font-size: 1.5rem;
@@ -20,6 +33,27 @@
 .fc-day-today {
     background-color: #f8f9fa !important;
     border: 1px solid #0056b3 !important;
+}
+
+/* Eventos de alta prioridad */
+.fc-event.evento-alta {
+    background-color: #dc3545 !important;
+    border: 1px solid #a71d2a !important;
+    color: white !important;
+}
+
+/* Eventos de prioridad media */
+.fc-event.evento-media {
+    background-color: #ffc107 !important;
+    border: 1px solid #e0a800 !important;
+    color: black !important;
+}
+
+/* Eventos de baja prioridad */
+.fc-event.evento-baja {
+    background-color: #28a745 !important;
+    border: 1px solid #1e7e34 !important;
+    color: white !important;
 }
 
 /* Botones */
