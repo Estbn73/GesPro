@@ -78,3 +78,6 @@ php artisan serve
 Accede a la aplicación en tu navegador en la URL: [http://localhost:8000](http://localhost:8000)
 
 ---
+
+### 9. Configurar Recuperacion de contraseña
+Se configura el env en la parte de MAIL de acuerdo a tus necesidades
