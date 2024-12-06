@@ -1,47 +1,57 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Iniciar Sesión</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" href="{{ asset('assets/login.css') }}">
-</head>
+@extends('layouts.auth_layout')
 
-<body>
-    <section class="login-section">
-        <div class="login-container">
-            <form action="{{ route('login') }}" method="post">
-                @csrf
-                <h2 class="login-title">Iniciar sesión</h2>
-                <p class="login-subtitle">Por favor ingresa tu correo y contraseña!</p>
+@section('content')
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white text-center">
+                <h4>Iniciar Sesión</h4>
+            </div>
+            <div class="card-body">
+                <!-- Mensaje de error -->
+                @if ($errors->has('email'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
 
-                <div class="input-group">
-                    <label for="email">Correo</label>
-                    <input type="email" name="email" id="email" placeholder="Ingresa tu correo" value="{{ old('email') }}" required autocomplete="email" autofocus />
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label class="form-check-label" for="remember">Recordarme</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                </form>
+
+                <!-- Botón para recuperar contraseña -->
+                <div class="text-center mt-3">
+                    <a href="{{ route('password.request') }}" class="btn btn-link">¿Olvidaste tu contraseña?</a>
                 </div>
-
-                <div class="input-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required autocomplete="current-password" />
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-               
-
-                <button type="submit" class="login-button">Iniciar sesión</button>
-
-             
-            </form>
+            </div>
         </div>
-    </section>
-</body>
-</html>
+    </div>
+</div>
+@endsection
+    

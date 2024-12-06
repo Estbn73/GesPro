@@ -1,103 +1,62 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel del Administrador</title>
-    <link rel="stylesheet" href="{{ asset('assets/user.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/user.css') }}"> 
-</head>
-<body>
+@extends('layouts.app')
 
-    <button class="menu-btn" id="menu-btn">☰</button>
+@section('content')
+    <h1>Bienvenido, Administrador!</h1>
+    <div id="user-management-container"></div>
+@endsection
 
-    <div class="sidebar" id="sidebar">
-    <a href="#home">Inicio</a>
-    <a href="#" id="manage-users">Gestión de Usuarios</a>
-    <a href="#" id="manage-projects">Gestión de Proyectos</a>
-    <a href="#" id="manage-documents">Ver Documentos</a>
-    <a href="#settings">Configuraciones</a>
-    <a class="dropdown-item" href="{{ route('logout') }}"
-       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        Cerrar sesión
-    </a>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
-</div>
-
-    <div class="main-content" id="main-content">
-        <h1>Bienvenido, Administrador!</h1>
-        <div id="user-management-container">
-        </div>
-    </div>
-
+@section('scripts')
     <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('main-content');
-
-        menuBtn.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-            mainContent.classList.toggle('active');
-            menuBtn.classList.toggle('active');
-        });
-        //FUNCION DE CRUD DE USUARIOS
         document.getElementById('manage-users').addEventListener('click', function() {
             loadUserManagement();
         });
 
         function loadUserManagement() {
-            fetch('{{ route("users.index") }}') 
+            fetch('{{ route("users.index") }}')
                 .then(response => response.text())
                 .then(html => {
-                    document.getElementById('user-management-container').innerHTML = html; 
+                    document.getElementById('user-management-container').innerHTML = html;
                 })
                 .catch(error => console.error('Error loading user management:', error));
         }
 
-        //FUNCION DE CRUD DE PROYECTOS
         document.getElementById('manage-projects').addEventListener('click', function() {
-         loadProjectManagement();
+            loadProjectManagement();
         });
 
         function loadProjectManagement() {
-        console.log('Fetching URL:', '{{ route("proyectos.index") }}');
-
-        fetch('{{ route("proyectos.index") }}')
-    .then(response => {
-        if (!response.ok) {
-            console.error('Error status:', response.status);
-            throw new Error('Error al cargar la vista de proyectos');
+            fetch('{{ route("proyectos.index") }}')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('user-management-container').innerHTML = html;
+                })
+                .catch(error => console.error('Error al cargar la gestión de proyectos:', error));
         }
-        return response.text();
-    })
-    .then(html => {
-        document.getElementById('user-management-container').innerHTML = html;
-    })
-    .catch(error => {
-        console.error('Error al cargar la gestión de proyectos:', error);
-    });
 
-    // FUNCION DE CRUD DE DOCUMENTOS
-    document.getElementById('manage-documents').addEventListener('click', function() {
-        loadDocumentManagement();
-    });
+        document.getElementById('manage-documents').addEventListener('click', function() {
+            loadDocumentManagement();
+        });
 
-    function loadDocumentManagement() {
-        fetch('{{ route("documents.index") }}') // Asegúrate de que la ruta exista y apunte a la lista de documentos
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('user-management-container').innerHTML = html;
-            })
-            .catch(error => console.error('Error al cargar la gestión de documentos:', error));
-    }
+        function loadDocumentManagement() {
+            fetch('{{ route("documents.index") }}')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('user-management-container').innerHTML = html;
+                })
+                .catch(error => console.error('Error al cargar la gestión de documentos:', error));
+        }
 
+        document.getElementById('manage-tareas').addEventListener('click', function() {
+            loadTaskManagement();
+        });
 
-
-}
+        function loadTaskManagement() {
+            fetch('{{ route("tareas.index") }}')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('user-management-container').innerHTML = html;
+                })
+                .catch(error => console.error('Error al cargar la gestión de tareas:', error));
+        }
     </script>
-
-</body>
-</html>
+@endsection

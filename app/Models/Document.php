@@ -7,6 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-    protected $fillable = ['name', 'file_path'];
-}
+    use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'file_path',
+        'proyecto_id',
+        'user_id', 
+    ];
+
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
